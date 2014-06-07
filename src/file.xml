@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><company>
+
+	<personne id="0">
+		<firstname>0</firstname>
+	</personne>
+
+	<personne id="1">
+		<firstname>1</firstname>
+	</personne>
+	
+	<personne id="2">
+		<firstname>2</firstname>
+	</personne>
+	
+	<personne id="3">
+		<firstname>3</firstname>
+	</personne>
+	
+	<personne id="4">
+		<firstname>4</firstname>
+	</personne>
+	
+	<personne id="5">
+		<firstname>5</firstname>
+	</personne>
+	
+	<personne id="6">
+		<firstname>6</firstname>
+	</personne>
+	
+	<personne id="7">
+		<firstname>7</firstname>
+	</personne>
+	
+	<personne id="8">
+		<firstname>8</firstname>
+	</personne>
+	
+	<personne id="9">
+		<firstname>9</firstname>
+	</personne>
+	
+	<personne id="10">
+		<firstname>10</firstname>
+	</personne>
+	
+	<personne id="11">
+		<firstname>11</firstname>
+	</personne>
+	
+	<personne id="12">
+		<firstname>12</firstname>
+	</personne>	
+	
+	<personne id="13">
+		<firstname>13</firstname>
+	</personne>	
+	
+	<personne id="14">
+		<firstname>14</firstname>
+	</personne>		
+	
+	<personne id="15">
+		<firstname>15</firstname>
+	</personne>
+		
+	<fils pere = "0" enfant = "1">
+	</fils>
+	
+	<fils pere = "0" enfant = "2">
+	</fils>
+	
+	<fils pere = "1" enfant = "3">
+	</fils>
+	
+	<fils pere = "1" enfant = "4">
+	</fils>
+	
+	<fils pere = "2" enfant = "5">
+	</fils>
+	
+	<fils pere = "2" enfant = "6">
+	</fils>
+	
+	<fils pere = "3" enfant = "7">
+	</fils>
+	
+	<fils pere = "3" enfant = "8">
+	</fils>
+	
+	<fils pere = "6" enfant = "9">
+	</fils>
+	
+	<fils pere = "0" enfant = "10">
+	</fils>
+	
+	<fils pere = "0" enfant = "15">
+	</fils>
+	
+	<fils pere = "10" enfant = "11">
+	</fils>
+	
+	<fils pere = "10" enfant = "12">
+	</fils>
+	
+	<fils pere = "12" enfant = "13">
+	</fils>
+	
+	<fils pere = "12" enfant = "14">
+	</fils>
+</company>
