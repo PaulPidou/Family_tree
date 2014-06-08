@@ -32,8 +32,7 @@ public class MyHandler extends DefaultHandler {
 		this.graphe = n;
 	}
 
-	public void startElement(String uri, String localName, String qName,
-			Attributes attributes) throws SAXException {
+	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 
 		if (attributes.getLength() > 0) {
 
@@ -111,8 +110,7 @@ public class MyHandler extends DefaultHandler {
 		}
 	}
 
-	public void endElement(String uri, String localName, String qName)
-			throws SAXException {
+	public void endElement(String uri, String localName, String qName) throws SAXException {
 
 		if (qName.equals("personne")) {
 			graphe.addNode(pere);

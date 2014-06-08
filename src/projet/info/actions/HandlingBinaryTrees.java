@@ -10,6 +10,7 @@ import java.io.Reader;
 import java.io.StreamTokenizer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -126,7 +127,6 @@ public class HandlingBinaryTrees {
 	}
 	
 	public void showGraph() {
-
 		myGraph.setLayoutAlgorithm(new TreeLayoutAlgorithm(
 				LayoutStyles.NONE), true);
 		myGraph.applyLayout();
@@ -143,6 +143,18 @@ public class HandlingBinaryTrees {
 	
 	public void addLink() {
 		
+	}
+	
+	private GraphNode printGraph(GraphNode source, Link current, List<Link> links)  {
+		GraphNode destination = new GraphNode(myGraph, ZestStyles.NONE, String.valueOf(current.destination().getName()));
+		GraphConnection gc = new GraphConnection(myGraph, ZestStyles.NONE, source, destination);
+		
+		for(Link i : links) {
+			if(current.destination().equals(i.source())) {
+				printGraph(destination, i, links);
+			}
+		}
+		return source;
 	}
 	
 	public void loadData() {
@@ -169,9 +181,15 @@ public class HandlingBinaryTrees {
 			System.out.println("Lors de l'appel à parse()");
 		}
 		
+		List<Link> links = new ArrayList<Link>();
+		links = myNetwork.links();
 		
+		GraphNode source = new GraphNode(myGraph, ZestStyles.NONE, String.valueOf(links.get(0).source().getName()));
 		
-		
+		for(Link link : links) {
+			if(link.source().equals(links.get(0).source()))
+				printGraph(source, link, links);
+		}
 	}
 	
 }
