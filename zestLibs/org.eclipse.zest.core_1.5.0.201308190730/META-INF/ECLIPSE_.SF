@@ -1,0 +1,303 @@
+Signature-Version: 1.0
+SHA1-Digest-Manifest: e5nGRDAsOiiiGBQFfsB+tNI0jy0=
+Created-By: 1.6.0 (IBM Corporation)
+SHA1-Digest-Manifest-Main-Attributes: uAyxE2YueAaFl30eLxIINTR2OEc=
+
+Name: about.ini
+SHA1-Digest: IoyQKm/UPMO+pu9iAU8HfE6FEbg=
+
+Name: org/eclipse/zest/core/widgets/internal/ExpandGraphLabel$Expander
+ .class
+SHA1-Digest: pwecVYJTeclRWKlQpGOObSHjGcY=
+
+Name: icons/tree_normal.gif
+SHA1-Digest: sZpFNgx5iGRxAZ/QQaTMQlpYs+Q=
+
+Name: org/eclipse/zest/core/viewers/GraphViewer$1.class
+SHA1-Digest: HooxRx1PGe97kAWCsFgicM/vj1E=
+
+Name: icons/home.gif
+SHA1-Digest: f9SiVkhrxDMfeSFhuCwyKqx3zI4=
+
+Name: org/eclipse/zest/core/widgets/GraphItem.class
+SHA1-Digest: uzdN3LnqqaSoc8SQxwXcEQCV8kQ=
+
+Name: org/eclipse/zest/core/viewers/IEntityStyleProvider.class
+SHA1-Digest: TixXq1hrQt+dN4e2QcD8mV0c7gE=
+
+Name: src/icons/tree_normal_inverse.gif
+SHA1-Digest: 0trPvEjYhMJWAzRFALtMqPUgpeA=
+
+Name: org/eclipse/zest/core/widgets/Graph$DragSupport.class
+SHA1-Digest: krzd3Hm/BY3iBUaoj3QYy/pKuNE=
+
+Name: org/eclipse/zest/core/viewers/internal/IStylingGraphModelFactory
+ .class
+SHA1-Digest: E/sMAtO5pDRNhcC2S8X1X27dudY=
+
+Name: src/icons/home.gif
+SHA1-Digest: CM6lMzvN9TMO54Mxd5/sYd8lOQ0=
+
+Name: org/eclipse/zest/core/widgets/GraphConnection.class
+SHA1-Digest: 0piypmskWu5UHXvtSjLjGI8cMvA=
+
+Name: org/eclipse/zest/core/widgets/ZestStyles.class
+SHA1-Digest: 61r1c3jSEveow7ystF8gvhQx5wg=
+
+Name: org/eclipse/zest/core/widgets/Graph.class
+SHA1-Digest: 47KY/JS3uvnayF9yuU6kJ1NnMmU=
+
+Name: org/eclipse/zest/core/widgets/internal/AligningBendpointLocator.
+ class
+SHA1-Digest: s0OYxXQA84DqbC2K+VWoqSbCZR0=
+
+Name: META-INF/maven/org.eclipse.zest.plugins/org.eclipse.zest.core/po
+ m.properties
+SHA1-Digest: rndSJwAr3eFJOPoirSWYg150MCI=
+
+Name: org/eclipse/zest/core/viewers/internal/GraphModelEntityRelations
+ hipFactory.class
+SHA1-Digest: oqlhK/Iaaq2htdFehWYBJE0YkdA=
+
+Name: org/eclipse/zest/core/widgets/internal/ZestRootLayer.class
+SHA1-Digest: h/S9ioMx/+6hpGAYZkVaZpwnSIo=
+
+Name: org/eclipse/zest/core/widgets/internal/ExpandGraphLabel.class
+SHA1-Digest: zYm0hqTPYCz6UVCXuujeNI/8gn8=
+
+Name: src/icons/tree_normal.gif
+SHA1-Digest: shIgUl3WjTsqyLD/Mx8OHFzfco4=
+
+Name: org/eclipse/zest/core/viewers/internal/SharedMessages.class
+SHA1-Digest: 9fGVdm0PJSHnbioW6Hp+3Bw1PoE=
+
+Name: org/eclipse/zest/core/viewers/ZoomContributionViewItem$2.class
+SHA1-Digest: AlIVaAfPlTlH8oHx8oI8KVxBoS8=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: QdryQvJlVywlE0MGLuwYCkmkyWk=
+
+Name: about.mappings
+SHA1-Digest: s9WgO20+p/7r5LhwTLkeTEPMhRQ=
+
+Name: org/eclipse/zest/core/widgets/Graph$2.class
+SHA1-Digest: odo7vNER3N9HxvhdqDli1Z54Q9w=
+
+Name: org/eclipse/zest/core/viewers/IGraphEntityRelationshipContentPro
+ vider.class
+SHA1-Digest: uwDUr6VU+tuIqwpkmeEg+mELNaE=
+
+Name: org/eclipse/zest/core/widgets/internal/PolylineArcConnection.cla
+ ss
+SHA1-Digest: CD0nGODH6Wp6NTLKUds0itywIDA=
+
+Name: org/eclipse/zest/core/widgets/Graph$4.class
+SHA1-Digest: w4Zji4Wz79tyWGlktKTXUbWAsAQ=
+
+Name: org/eclipse/zest/core/widgets/Graph$MyRunnable.class
+SHA1-Digest: M3HmTET/L1UvY0l3mlG+m/dXhVc=
+
+Name: org/eclipse/zest/core/widgets/internal/CachedLabel.class
+SHA1-Digest: ClzJRmOmQ+5Km5pozHkI6NSYYfk=
+
+Name: org/eclipse/zest/core/widgets/Graph$6.class
+SHA1-Digest: M71iuch7SZ+fwuOXE5cAnbi5cWg=
+
+Name: icons/tree_hanging_inverse.gif
+SHA1-Digest: dUqfPUf0dPIAeo5rmfb41hr58YU=
+
+Name: org/eclipse/zest/core/widgets/Graph$8.class
+SHA1-Digest: vB6Xt6vT1z/TIsy/84Hcwt/WyVU=
+
+Name: org/eclipse/zest/core/widgets/internal/XYScaledGraphics$FontKey.
+ class
+SHA1-Digest: snMDqnH3tS09Y0BPEbUD8DDvRfk=
+
+Name: org/eclipse/zest/core/viewers/IConnectionStyleBezierExtension.cl
+ ass
+SHA1-Digest: tplO8yiMy9VbE52P5j8fP5sk7J8=
+
+Name: org/eclipse/zest/core/viewers/internal/AbstractStructuredGraphVi
+ ewer.class
+SHA1-Digest: GgSwmqXADEPW3GP+gPWrRKYS+Xg=
+
+Name: org/eclipse/zest/core/viewers/IConnectionStyleProvider.class
+SHA1-Digest: CFRUoxtF+ibtvvE8NdQr77R4QEM=
+
+Name: org/eclipse/zest/core/viewers/internal/AbstractStylingModelFacto
+ ry.class
+SHA1-Digest: agPFIt5Cm1vsppDNBkghXg8+dEA=
+
+Name: about.properties
+SHA1-Digest: 9h0NvGrAmkW4dfrB3do8SxMocPA=
+
+Name: src/icons/tree_hanging_inverse.gif
+SHA1-Digest: w+DhrX/ldlCVvVB105wU1dPoUdI=
+
+Name: org/eclipse/zest/core/viewers/AbstractZoomableViewer.class
+SHA1-Digest: YZCwqzwH0eRIRNNH5aR6AjWV/ic=
+
+Name: icons/tree_hanging.gif
+SHA1-Digest: Ads0CmJ5yMLfpNUB0jBch9hNLNo=
+
+Name: org/eclipse/zest/core/widgets/GraphNode.class
+SHA1-Digest: e2jVkBDIsTpGV2cHD0mmToML7E8=
+
+Name: org/eclipse/zest/core/viewers/GraphViewer.class
+SHA1-Digest: /NEMRZxpvgp0HW+XvFhWNw545Wo=
+
+Name: org/eclipse/zest/core/widgets/internal/ContainerFigure.class
+SHA1-Digest: M9adwBQNgs0BSvwyO6GtKkDiLCE=
+
+Name: org/eclipse/zest/core/widgets/GraphContainer$ContainerDimension.
+ class
+SHA1-Digest: AEpFcQiIihyHb3Rx9Rz/z5t8RIk=
+
+Name: org/eclipse/zest/core/viewers/INestedContentProvider.class
+SHA1-Digest: FHDKcAbjUUjt6GaXZ/hcTofYxHo=
+
+Name: org/eclipse/zest/core/viewers/EntityConnectionData.class
+SHA1-Digest: s8XdaGEh7JPyBb15LVLRgBtqy9E=
+
+Name: org/eclipse/zest/core/viewers/ISelfStyleProvider.class
+SHA1-Digest: K6cfB3zGSDsxT62iAZ1vWkeVbhg=
+
+Name: src/icons/tree_hanging.gif
+SHA1-Digest: FcdQXqAHK9zPlzGO7b+qDGo2J2E=
+
+Name: org/eclipse/zest/core/viewers/internal/GraphItemStyler.class
+SHA1-Digest: Uhp0OBvAHv+Q3XG2n8jlHoKfvG0=
+
+Name: org/eclipse/zest/core/widgets/internal/RoundedChopboxAnchor.clas
+ s
+SHA1-Digest: IuF2O45xnb/zZbcmqualyw0qfaM=
+
+Name: org/eclipse/zest/core/viewers/GraphViewer$2.class
+SHA1-Digest: kp6zOG5kzWWzhy4AILa/lqYUdEA=
+
+Name: org/eclipse/zest/core/widgets/internal/AspectRatioFreeformLayer.
+ class
+SHA1-Digest: NslWxqbcg89lE3yrp39Lm3oEpqQ=
+
+Name: plugin.properties
+SHA1-Digest: CfQsJSsfSJHVVZXdGziOe581rCA=
+
+Name: org/eclipse/zest/core/viewers/IEntityConnectionStyleProvider.cla
+ ss
+SHA1-Digest: PIZqwl5Fq1qIPPd/CTbpFmZoNKs=
+
+Name: META-INF/maven/org.eclipse.zest.plugins/org.eclipse.zest.core/po
+ m.xml
+SHA1-Digest: G8XMSwANatpiSRwQLbqqUkYyRcE=
+
+Name: org/eclipse/zest/core/viewers/ZoomContributionViewItem.class
+SHA1-Digest: 9/A2ct6TNrJAQ4YkuOd7O919Zlo=
+
+Name: org/eclipse/zest/core/viewers/IZoomableWorkbenchPart.class
+SHA1-Digest: C4GWRg6Dsc0PVqpQm/GijVbp/HA=
+
+Name: org/eclipse/zest/core/viewers/internal/GraphModelFactory.class
+SHA1-Digest: on6hELSmwf8ZxdZoJWoCIn8x2Nc=
+
+Name: org/eclipse/zest/core/widgets/internal/LoopAnchor.class
+SHA1-Digest: w+JYDPxompkNOB/U1K85LsOxoFw=
+
+Name: org/eclipse/zest/core/widgets/CGraphNode.class
+SHA1-Digest: IzEBiD4+pDFsKogngMx82kmNGDk=
+
+Name: org/eclipse/zest/core/widgets/GraphNode$LayoutGraphNode.class
+SHA1-Digest: OGcQ3pKv7oq4aWtua6x8Z/Afza0=
+
+Name: org/eclipse/zest/core/widgets/GraphContainer.class
+SHA1-Digest: L8Qsac5RiNQprKKb7Flj2w60vhk=
+
+Name: org/eclipse/zest/core/viewers/ZoomContributionViewItem$1.class
+SHA1-Digest: GuTU2FLGlA7MWYSrLvIMAKpNDls=
+
+Name: org/eclipse/zest/core/viewers/internal/ZoomManager.class
+SHA1-Digest: bQdv1FD0rxWHY9kCknbVZ3Bz+2k=
+
+Name: org/eclipse/zest/core/viewers/internal/AbstractStructuredGraphVi
+ ewer$SimpleGraphComparator.class
+SHA1-Digest: k0UZETFYOouSgSebn6TAZQWeJ7w=
+
+Name: org/eclipse/zest/core/viewers/IGraphContentProvider.class
+SHA1-Digest: 7KW3hFl2xic63Cy0VeT2e7FJZSE=
+
+Name: org/eclipse/zest/core/widgets/IContainer.class
+SHA1-Digest: mmmRPtt9IbRB0qFkkZLWKcqpD5M=
+
+Name: org/eclipse/zest/core/viewers/ZoomContributionViewItem$3.class
+SHA1-Digest: mtv9RJZyHdheEgc++57A63tY8OA=
+
+Name: org/eclipse/zest/core/widgets/internal/XYScaledGraphics.class
+SHA1-Digest: qdCvFvZwTHkJ8tjrlHl46ohsGoY=
+
+Name: org/eclipse/zest/core/widgets/internal/GraphLabel.class
+SHA1-Digest: 8gUhf2dEN+751Kvtvt5Mh7lhxu0=
+
+Name: org/eclipse/zest/core/widgets/GraphConnection$1.class
+SHA1-Digest: laPjKf6js52ajZ86jyKESWI2wrA=
+
+Name: org/eclipse/zest/core/widgets/Graph$1.class
+SHA1-Digest: 82H9Wwge+b6XswB8OpTdiS2ftac=
+
+Name: org/eclipse/zest/core/widgets/Graph$3.class
+SHA1-Digest: l6sNppj1DrdjUst9RTq6jgWJKdQ=
+
+Name: org/eclipse/zest/core/widgets/GraphConnection$GraphLayoutConnect
+ ion.class
+SHA1-Digest: VF1AwGJN2WI0DDOWGDZv4r3megY=
+
+Name: org/eclipse/zest/core/widgets/Graph$5.class
+SHA1-Digest: U3XoRvN/+KjEARfCHW/jdoSRFDE=
+
+Name: org/eclipse/zest/core/widgets/internal/ExpandGraphLabel$1.class
+SHA1-Digest: wnRuT4ruUEXkJKvghvhmk/3NylI=
+
+Name: org/eclipse/zest/core/widgets/internal/XYScaledGraphics$FontHeig
+ htCache.class
+SHA1-Digest: FdLpuIAnUW4LGDSV42gJJpsHhCQ=
+
+Name: org/eclipse/zest/core/widgets/Graph$7.class
+SHA1-Digest: juWn3iODIk+k/HpOd61Xrg5BUH4=
+
+Name: about.html
+SHA1-Digest: fhCvRAHSnFOKPx4YjzDC6YfwI1c=
+
+Name: org/eclipse/zest/core/widgets/Graph$9.class
+SHA1-Digest: r24ULl+p6EbzR8W7vBHkyaHJeLc=
+
+Name: org/eclipse/zest/core/widgets/internal/XYScaledGraphics$State.cl
+ ass
+SHA1-Digest: rHgHIl9B6uki7xOpP/wN5suSv30=
+
+Name: org/eclipse/zest/core/viewers/internal/GraphModelEntityFactory.c
+ lass
+SHA1-Digest: irns2/EkgJ+4EDUwPLlKdNzex28=
+
+Name: modeling32.png
+SHA1-Digest: HNz2oYHVqQEUObJQL6sh+Ik2jak=
+
+Name: org/eclipse/zest/core/viewers/IEntityConnectionStyleBezierExtens
+ ion.class
+SHA1-Digest: qrzhkrt88Z2MMNUTRlViD2A/QMM=
+
+Name: org/eclipse/zest/core/viewers/internal/ZoomListener.class
+SHA1-Digest: 4qMIPkG+QwXTSh5aMhx4UPZ7N6A=
+
+Name: org/eclipse/zest/core/viewers/IFigureProvider.class
+SHA1-Digest: B0wFguZ25eUn1aQf4PEwl/jjCdY=
+
+Name: icons/tree_normal_inverse.gif
+SHA1-Digest: uH8wyw5ct9xSV9rOAg56IQiXRU8=
+
+Name: org/eclipse/zest/core/widgets/ConstraintAdapter.class
+SHA1-Digest: /gZGmYmrOpGfw/D7UoGgkWZFZU4=
+
+Name: org/eclipse/zest/core/widgets/internal/RevealListener.class
+SHA1-Digest: mP8uZi0BU7lFzidkO7AxUzPFMxU=
+
+Name: org/eclipse/zest/core/viewers/IGraphEntityContentProvider.class
+SHA1-Digest: ZRr8UtbqfGHlS+QqxC2W8kFzuH4=
+

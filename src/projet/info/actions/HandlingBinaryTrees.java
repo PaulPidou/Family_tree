@@ -1,8 +1,10 @@
 package projet.info.actions;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StreamTokenizer;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -30,6 +33,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 import projet.info.commandInterpreter.CommandLine;
 import projet.info.graph.core.Link;
@@ -45,7 +50,7 @@ import projet.info.parser.MyHandler;
 public class HandlingBinaryTrees {
 
 	private static Network myNetwork = new Network();
-	private static Display myDisplay = new Display();;
+	private static Display myDisplay = new Display();
 	private static Shell myShell = new Shell();
 	private static Graph myGraph = new Graph(myShell, SWT.NONE);
 	private static ArrayList<GraphNode> listeNoeuds = new ArrayList<GraphNode>();
@@ -109,7 +114,10 @@ public class HandlingBinaryTrees {
 		jr.setCommandLineVersion("Command Line v.01");
 		jr.assignClassToCommnd("addNode",
 				"projet.info.actions.AddNode");
-
+		jr.assignClassToCommnd("addLink",
+				"projet.info.actions.AddLink");
+		jr.assignClassToCommnd("loadData",
+				"projet.info.actions.LoadData");
 		jr.init();
 		jr.setIsInteractive(interactive);
 		// parse and execute commands.
@@ -131,6 +139,39 @@ public class HandlingBinaryTrees {
 		gn.setBackgroundColor(ColorConstants.cyan);
 		listeNoeuds.add(gn);
 		nbrNodes++;
+	}
+	
+	public void addLink() {
+		
+	}
+	
+	public void loadData() {
+		try{
+			// création d'une fabrique de parseurs SAX
+			SAXParserFactory fabrique = SAXParserFactory.newInstance();
+
+			// création d'un parseur SAX
+			SAXParser parseur = fabrique.newSAXParser();
+
+			// lecture d'un fichier XML avec un DefaultHandler
+			File fichier = new File("./file.xml");
+			DefaultHandler gestionnaire = new MyHandler(myNetwork);
+			parseur.parse(fichier, gestionnaire);
+
+		}catch(ParserConfigurationException pce){
+			System.out.println("Erreur de configuration du parseur");
+			System.out.println("Lors de l'appel à newSAXParser()");
+		}catch(SAXException se){
+			System.out.println("Erreur de parsing");
+			System.out.println("Lors de l'appel à parse()");
+		}catch(IOException ioe){
+			System.out.println("Erreur d'entrée/sortie");
+			System.out.println("Lors de l'appel à parse()");
+		}
+		
+		
+		
+		
 	}
 	
 }

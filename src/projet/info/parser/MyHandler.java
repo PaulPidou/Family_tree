@@ -77,8 +77,7 @@ public class MyHandler extends DefaultHandler {
 		}
 	}
 
-	public void characters(char ch[], int start, int length)
-			throws SAXException {
+	public void characters(char ch[], int start, int length) throws SAXException {
 
 		if (tagFname) {
 			// System.out.println(new String(ch, start, length));
