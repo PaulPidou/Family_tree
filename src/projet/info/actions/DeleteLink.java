@@ -4,7 +4,7 @@ import java.util.Vector;
 import org.eclipse.swt.widgets.Display;
 import projet.info.commandInterpreter.CommandLine;
 
-public class AddLink implements CommandLine.ICommand {
+public class DeleteLink implements CommandLine.ICommand {
 	public boolean doIt(Vector v) {
 		System.out.println("Running the command : "+v.elementAt(0).toString());
 		Display myDisplay = HandlingBinaryTrees.getDisplay();
@@ -15,6 +15,7 @@ public class AddLink implements CommandLine.ICommand {
 			System.out.println("Cette commande nécessite deux paramètres : source destination");
 			return true;
 		}
+
 		
 		int firstElement = (int) Double.parseDouble(v.elementAt(1).toString());
 		int secondElement = (int) Double.parseDouble(v.elementAt(2).toString());
@@ -24,7 +25,7 @@ public class AddLink implements CommandLine.ICommand {
 		myDisplay.asyncExec(new Runnable() {
 			public void run() {
 				HandlingBinaryTrees grapher = new HandlingBinaryTrees();
-				grapher.addLink(node1, node2);
+				grapher.deleteLink(node1, node2);
 				grapher.showGraph();
 			}
 		});

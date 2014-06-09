@@ -197,7 +197,7 @@ public class CommandLine {
 	        	    case StreamTokenizer.TT_NUMBER:
     	        	    // A number was found; the value is in nval
         	        	// double num = st.nval;
-	        	    	System.out.println("J'ai rencontré un entier : "+st.nval);
+	        	    	//System.out.println("J'ai rencontré un entier : "+st.nval);
 	        	    	v.add(st.nval);
             	    	break;
 	            	case StreamTokenizer.TT_WORD:

@@ -7,7 +7,6 @@ import org.eclipse.swt.widgets.Display;
 import projet.info.commandInterpreter.CommandLine;
 
 public class LoadData implements CommandLine.ICommand {
-	
 	public boolean doIt(Vector v) {
 		System.out.println("Running the command : "+v.elementAt(0).toString());
 		try {

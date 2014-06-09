@@ -118,6 +118,8 @@ public class HandlingBinaryTrees {
 				"projet.info.actions.AddNode");
 		jr.assignClassToCommnd("addLink",
 				"projet.info.actions.AddLink");
+		jr.assignClassToCommnd("deleteLink",
+				"projet.info.actions.DeleteLink");
 		jr.assignClassToCommnd("loadData",
 				"projet.info.actions.LoadData");
 		jr.init();
@@ -142,14 +144,53 @@ public class HandlingBinaryTrees {
 		nbrNodes++;
 	}
 	
-	public void addLink() {
+	public void addLink(String node1, String node2) {
+		GraphNode source = null, destination = null;
+		String nodeString = "";
+		int found = 2;
+		List<GraphNode> listNodes = new ArrayList<GraphNode>();
+		listNodes = myGraph.getNodes();
+		
+		for(GraphNode node : listNodes) {
+			nodeString = node.toString().substring(16);
+			if(nodeString.equals(node1)) {
+				source = node;
+				found--;
+			} else if(nodeString.equals(node2)) {
+				destination = node;
+				found--;
+			}
+			if(found <= 0) // Leave the loop once we have found the source and the destination
+				break;
+		}
+		
+		if(source != null && destination != null)
+			new GraphConnection(myGraph, ZestStyles.NONE, source, destination);
+		else
+			System.out.println("Paramètres non valides");
+		
+	}
+	
+	public void deleteLink(String node1, String node2) {
+		String sourceString, destinationString;
+		List<GraphConnection> listConnections = new ArrayList<GraphConnection>();
+		listConnections = myGraph.getConnections();
+		
+		for(GraphConnection gc : listConnections) {
+			sourceString = gc.getSource().toString().substring(16);
+			destinationString = gc.getDestination().toString().substring(16);
+
+			if(sourceString.equals(node1) && destinationString.equals(node2)) {
+				System.out.println("FOUND !");
+				break;
+			}
+		}
 		
 	}
 	
 	private GraphNode printGraph(GraphNode source, Link current, List<Link> links)  {
 		GraphNode destination = new GraphNode(myGraph, ZestStyles.NONE, String.valueOf(current.destination().getName()));
 		new GraphConnection(myGraph, ZestStyles.NONE, source, destination);
-		
 		for(Link i : links) {
 			if(current.destination().equals(i.source())) {
 				printGraph(destination, i, links);
