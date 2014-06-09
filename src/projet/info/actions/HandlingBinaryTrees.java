@@ -181,7 +181,7 @@ public class HandlingBinaryTrees {
 			destinationString = gc.getDestination().toString().substring(16);
 
 			if(sourceString.equals(node1) && destinationString.equals(node2)) {
-				System.out.println("FOUND !");
+				gc.dispose();
 				break;
 			}
 		}
