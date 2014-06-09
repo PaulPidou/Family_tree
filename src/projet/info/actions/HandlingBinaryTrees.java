@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -106,7 +107,7 @@ public class HandlingBinaryTrees {
 		}
 		
 		if ( args.length > 0 ) {
-			interactive = false;;
+			interactive = false;
 		}
 		
 		// initialize the command line object.
@@ -147,7 +148,7 @@ public class HandlingBinaryTrees {
 	
 	private GraphNode printGraph(GraphNode source, Link current, List<Link> links)  {
 		GraphNode destination = new GraphNode(myGraph, ZestStyles.NONE, String.valueOf(current.destination().getName()));
-		GraphConnection gc = new GraphConnection(myGraph, ZestStyles.NONE, source, destination);
+		new GraphConnection(myGraph, ZestStyles.NONE, source, destination);
 		
 		for(Link i : links) {
 			if(current.destination().equals(i.source())) {
@@ -157,7 +158,7 @@ public class HandlingBinaryTrees {
 		return source;
 	}
 	
-	public void loadData() {
+	public void loadData(String file) {
 		try{
 			// création d'une fabrique de parseurs SAX
 			SAXParserFactory fabrique = SAXParserFactory.newInstance();
@@ -166,7 +167,12 @@ public class HandlingBinaryTrees {
 			SAXParser parseur = fabrique.newSAXParser();
 
 			// lecture d'un fichier XML avec un DefaultHandler
-			File fichier = new File("./file.xml");
+			file = "./"+file;
+			File fichier = new File(file);
+			if(!fichier.exists()) {
+				System.out.println("Le fichier spécifié n'existe pas. Chargement du fichier par défaut !");
+				fichier = new File("file.xml");
+			}
 			DefaultHandler gestionnaire = new MyHandler(myNetwork);
 			parseur.parse(fichier, gestionnaire);
 
