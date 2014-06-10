@@ -15,7 +15,6 @@ public class DeleteLink implements CommandLine.ICommand {
 			System.out.println("Cette commande nécessite deux paramètres : source destination");
 			return true;
 		}
-
 		
 		int firstElement = (int) Double.parseDouble(v.elementAt(1).toString());
 		int secondElement = (int) Double.parseDouble(v.elementAt(2).toString());

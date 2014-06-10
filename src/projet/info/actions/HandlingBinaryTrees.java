@@ -73,7 +73,6 @@ public class HandlingBinaryTrees {
 		return myGraph;
 	}
 
-
 	public void open() {
 		
 		myShell.setText("Projet Informatique !");
@@ -120,6 +119,8 @@ public class HandlingBinaryTrees {
 				"projet.info.actions.AddLink");
 		jr.assignClassToCommnd("deleteLink",
 				"projet.info.actions.DeleteLink");
+		jr.assignClassToCommnd("getChilds",
+				"projet.info.actions.GetChilds");
 		jr.assignClassToCommnd("loadData",
 				"projet.info.actions.LoadData");
 		jr.init();
@@ -137,14 +138,15 @@ public class HandlingBinaryTrees {
 	}
 	
 	public void addNode() {
-		GraphNode gn = new GraphNode(myGraph, ZestStyles.NONE,
-				String.valueOf(nbrNodes));
+		GraphNode gn = new GraphNode(myGraph, ZestStyles.NONE,String.valueOf(nbrNodes));
 		gn.setBackgroundColor(ColorConstants.cyan);
+		Node node = new Node(String.valueOf(nbrNodes));
 		listeNoeuds.add(gn);
 		nbrNodes++;
+		myNetwork.addNode(node);
 	}
 	
-	public void addLink(String node1, String node2) {
+	private boolean addLinkGraph(String node1, String node2) {
 		GraphNode source = null, destination = null;
 		String nodeString = "";
 		int found = 2;
@@ -164,14 +166,48 @@ public class HandlingBinaryTrees {
 				break;
 		}
 		
-		if(source != null && destination != null)
+		if(source != null && destination != null) {
 			new GraphConnection(myGraph, ZestStyles.NONE, source, destination);
-		else
-			System.out.println("Paramètres non valides");
-		
+			return true;
+		} else
+			return false;
 	}
 	
-	public void deleteLink(String node1, String node2) {
+	private boolean addLinkNetwork(String node1, String node2) {
+		Node source = null, destination = null;
+		String nodeString = "";
+		int found = 2;
+		List<Node> listNodes = new ArrayList<Node>();
+		listNodes = myNetwork.nodes();
+		
+		for(Node node : listNodes) {
+			nodeString = node.getName();
+			if(nodeString.equals(node1)) {
+				source = node;
+				found--;
+			} else if(nodeString.equals(node2)) {
+				destination = node;
+				found--;
+			}
+			if(found <= 0) // Leave the loop once we have found the source and the destination
+				break;
+		}
+		
+		if(source != null && destination != null) {
+			myNetwork.connect(source, destination);
+			return true;
+		} else
+			return false;
+	}
+	
+	public void addLink(String node1, String node2) {
+		if(addLinkGraph(node1, node2) && addLinkNetwork(node1, node2))
+			System.out.println("Liaison créée avec succès.");
+		 else
+			System.out.println("Paramètres non valides.");
+	}
+	
+	private boolean deleteLinkGraph(String node1, String node2) {
 		String sourceString, destinationString;
 		List<GraphConnection> listConnections = new ArrayList<GraphConnection>();
 		listConnections = myGraph.getConnections();
@@ -182,14 +218,47 @@ public class HandlingBinaryTrees {
 
 			if(sourceString.equals(node1) && destinationString.equals(node2)) {
 				gc.dispose();
-				break;
+				return true;
 			}
 		}
+		return false;
+	}
+	
+	private boolean deleteLinkNetwork(String node1, String node2) {
+		List<Link> listLinks = new ArrayList<Link>();
+		listLinks = myNetwork.links();
 		
+		for(Link link : listLinks) {
+			if(link.source().getName().equals(node1) && link.destination().getName().equals(node2)) {
+				myNetwork.disconnect(link.source(), link.destination());
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void deleteLink(String node1, String node2) {
+		if(deleteLinkGraph(node1, node2) && deleteLinkNetwork(node1, node2))
+			System.out.println("Liaison supprimée avec succès.");
+		 else
+			System.out.println("Paramètres non valides.");
+	}
+	
+	public void getChilds(String nodus) {
+		List<GraphNode> listNodes = new ArrayList<GraphNode>();
+		listNodes = myGraph.getNodes();
+		
+		for(GraphNode node : listNodes) {
+			if(node.toString().substring(16).equals(nodus)) {
+				node.setBackgroundColor(ColorConstants.red);
+			}
+		}
 	}
 	
 	private GraphNode printGraph(GraphNode source, Link current, List<Link> links)  {
 		GraphNode destination = new GraphNode(myGraph, ZestStyles.NONE, String.valueOf(current.destination().getName()));
+		listeNoeuds.add(destination);
+		nbrNodes++;
 		new GraphConnection(myGraph, ZestStyles.NONE, source, destination);
 		for(Link i : links) {
 			if(current.destination().equals(i.source())) {
@@ -216,7 +285,7 @@ public class HandlingBinaryTrees {
 			}
 			DefaultHandler gestionnaire = new MyHandler(myNetwork);
 			parseur.parse(fichier, gestionnaire);
-
+			
 		}catch(ParserConfigurationException pce){
 			System.out.println("Erreur de configuration du parseur");
 			System.out.println("Lors de l'appel à newSAXParser()");
@@ -232,6 +301,8 @@ public class HandlingBinaryTrees {
 		links = myNetwork.links();
 		
 		GraphNode source = new GraphNode(myGraph, ZestStyles.NONE, String.valueOf(links.get(0).source().getName()));
+		listeNoeuds.add(source);
+		nbrNodes++;
 		
 		for(Link link : links) {
 			if(link.source().equals(links.get(0).source()))
