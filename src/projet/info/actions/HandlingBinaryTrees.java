@@ -244,6 +244,15 @@ public class HandlingBinaryTrees {
 			System.out.println("Paramètres non valides.");
 	}
 	
+	private void resetColor() {
+		List<GraphNode> listNodes = new ArrayList<GraphNode>();
+		listNodes = myGraph.getNodes();
+		
+		for(GraphNode node : listNodes) {
+			node.setBackgroundColor(ColorConstants.buttonLightest);
+		}
+	}
+	
 	private GraphNode colorChilds(GraphNode node) {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
 		listConnection = myGraph.getConnections();
@@ -264,13 +273,12 @@ public class HandlingBinaryTrees {
 		
 		for(GraphNode node : listNodes) {
 			if(node.toString().substring(16).equals(nodus)) {
-				root = node;
-				root.setBackgroundColor(ColorConstants.red);
+				resetColor();
+				node.setBackgroundColor(ColorConstants.red);
+				colorChilds(node);
 				break;
 			}
 		}
-		colorChilds(root);
-		
 	}
 	
 	private GraphNode printGraph(GraphNode source, Link current, List<Link> links)  {
@@ -326,6 +334,7 @@ public class HandlingBinaryTrees {
 			if(link.source().equals(links.get(0).source()))
 				printGraph(source, link, links);
 		}
+		resetColor();
 	}
 	
 }
