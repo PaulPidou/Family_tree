@@ -129,6 +129,10 @@ public class HandlingBinaryTrees {
 				"projet.info.actions.GetUncles");
 		jr.assignClassToCommnd("getCousins",
 				"projet.info.actions.GetCousins");
+		jr.assignClassToCommnd("getCommonUncles",
+				"projet.info.actions.GetCommonUncles");
+		jr.assignClassToCommnd("getCommonCousins",
+				"projet.info.actions.GetCommonCousins");
 		jr.assignClassToCommnd("loadData",
 				"projet.info.actions.LoadData");
 		jr.init();
@@ -438,6 +442,143 @@ public class HandlingBinaryTrees {
 				colorCousins(node);
 				break;
 			}
+		}
+	}
+	
+	private void colorCommonUncles(GraphNode node1, GraphNode node2) {
+		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
+		listConnection = myGraph.getConnections();
+		
+		List<GraphNode> fathers = new ArrayList<GraphNode>();
+		List<GraphNode> grandFathers = new ArrayList<GraphNode>();
+		
+		for(GraphConnection connection : listConnection) {
+			if(connection.getDestination().equals(node1)) {
+				fathers.add(connection.getSource());
+			} else if(connection.getDestination().equals(node2)) {
+				fathers.add(connection.getSource());
+			}
+		}
+		
+		for(GraphConnection connection : listConnection) {
+			for(GraphNode father : fathers) {
+				if(connection.getDestination().equals(father)) {
+					grandFathers.add(connection.getSource());
+				}
+			}
+		}
+		
+		for(GraphConnection connection : listConnection) {
+			for(GraphNode grandFather : grandFathers) {
+				if(connection.getSource().equals(grandFather)) {
+					if(!fathers.contains(connection.getDestination())) {
+						connection.getDestination().setBackgroundColor(ColorConstants.green);
+					}
+				}
+			}
+		}
+	}
+	
+	public void getCommonUncles(String node1, String node2) {
+		List<GraphNode> listNodes = new ArrayList<GraphNode>();
+		listNodes = myGraph.getNodes();
+		
+		int found = 2;
+		GraphNode nodus1 = null, nodus2 = null;
+		
+		for(GraphNode node : listNodes) {
+			if(node.toString().substring(16).equals(node1)) {
+				nodus1 = node;
+				found--;
+			} else if(node.toString().substring(16).equals(node2)) {
+				nodus2 = node;
+				found--;
+			}
+			if(found <= 0) {
+				break;
+			}
+		}
+		
+		if(found == 0) {
+			resetColor();
+			nodus1.setBackgroundColor(ColorConstants.red);
+			nodus2.setBackgroundColor(ColorConstants.red);
+			colorCommonUncles(nodus1, nodus2);
+		} else {
+			System.out.println("Paramètres non valides.");
+		}
+	}
+	
+	private void colorCommonCousins(GraphNode node1, GraphNode node2) {
+		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
+		listConnection = myGraph.getConnections();
+		
+		List<GraphNode> fathers = new ArrayList<GraphNode>();
+		List<GraphNode> grandFathers = new ArrayList<GraphNode>();
+		List<GraphNode> uncles = new ArrayList<GraphNode>();
+		
+		for(GraphConnection connection : listConnection) {
+			if(connection.getDestination().equals(node1)) {
+				fathers.add(connection.getSource());
+			} else if(connection.getDestination().equals(node2)) {
+				fathers.add(connection.getSource());
+			}
+		}
+		
+		for(GraphConnection connection : listConnection) {
+			for(GraphNode father : fathers) {
+				if(connection.getDestination().equals(father)) {
+					grandFathers.add(connection.getSource());
+				}
+			}
+		}
+		
+		for(GraphConnection connection : listConnection) {
+			for(GraphNode grandFather : grandFathers) {
+				if(connection.getSource().equals(grandFather)) {
+					if(!fathers.contains(connection.getDestination())) {
+						uncles.add(connection.getDestination());
+					}
+				}
+			}
+		}
+		
+		for(GraphConnection connection : listConnection) {
+			for(GraphNode uncle : uncles) {
+				if(connection.getSource().equals(uncle)) {
+					connection.getDestination().setBackgroundColor(ColorConstants.green);
+				}
+			}
+		}
+	}
+	
+	public void getCommonCousins(String node1, String node2) {
+		List<GraphNode> listNodes = new ArrayList<GraphNode>();
+		listNodes = myGraph.getNodes();
+		
+		int found = 2;
+		GraphNode nodus1 = null, nodus2 = null;
+		
+		for(GraphNode node : listNodes) {
+			if(node.toString().substring(16).equals(node1)) {
+				nodus1 = node;
+				found--;
+			} else if(node.toString().substring(16).equals(node2)) {
+				nodus2 = node;
+				found--;
+			}
+			if(found <= 0) {
+				break;
+			}
+		}
+		
+		if(found == 0) {
+			resetColor();
+			nodus1.setBackgroundColor(ColorConstants.red);
+			nodus2.setBackgroundColor(ColorConstants.red);
+			colorCommonCousins(nodus1, nodus2);
+		} else {
+			System.out.println("Paramètres non valides.");
 		}
 	}
 	
