@@ -182,7 +182,7 @@ public class HandlingBinaryTrees {
 	 * Ajoute un lien(GraphConnection) à myGraph entre deux noeuds (GraphNode)
 	 * @param node1 Le noeud source sous forme de String
 	 * @param node2 Le noeud destination sous forme de String
-	 * @return vrai(true) si la connection à été faite avec sucès ou faux(false) si au moins un des deux noeuds n'a pas été trouvé
+	 * @return vrai(true) si la connexion à été faite avec sucès ou faux(false) si au moins un des deux noeuds n'a pas été trouvé
 	 */
 	private boolean addLinkGraph(String node1, String node2) {
 		GraphNode source = null, destination = null;
@@ -201,7 +201,7 @@ public class HandlingBinaryTrees {
 	 * Ajoute un lien(link) à myNetowrk entre deux noeuds (node)
 	 * @param node1 Le noeud source sous forme de String
 	 * @param node2 Le noeud destination sous forme de String
-	 * @return vrai(true) si la connection à été faite avec sucès ou faux(false) si au moins un des deux noeuds n'a pas été trouvé
+	 * @return vrai(true) si la connexion à été faite avec sucès ou faux(false) si au moins un des deux noeuds n'a pas été trouvé
 	 */
 	private boolean addLinkNetwork(String node1, String node2) {
 		Node source = null, destination = null;
@@ -246,7 +246,7 @@ public class HandlingBinaryTrees {
 	 * Supprime un lien(GraphConnection) de myGraph entre deux noeuds (GraphNode)
 	 * @param node1 Le noeud source sous forme de String
 	 * @param node2 Le noeud destination sous forme de String
-	 * @return vrai(true) si la connection à été supprimé avec sucès ou faux(false) si la connection n'a pas été trouvé
+	 * @return vrai(true) si la connexion à été supprimé avec sucès ou faux(false) si la connexion n'a pas été trouvé
 	 */
 	private boolean deleteLinkGraph(String node1, String node2) {
 		String sourceString, destinationString;
@@ -269,7 +269,7 @@ public class HandlingBinaryTrees {
 	 * Supprime un lien(link) de myNetwork entre deux noeuds (node)
 	 * @param node1 Le noeud source sous forme de String
 	 * @param node2 Le noeud destination sous forme de String
-	 * @return vrai(true) si la connection à été supprimé avec sucès ou faux(false) si la connection n'a pas été trouvé
+	 * @return vrai(true) si la connexion à été supprimé avec sucès ou faux(false) si la connexion n'a pas été trouvé
 	 */
 	private boolean deleteLinkNetwork(String node1, String node2) {
 		List<Link> listLinks = new ArrayList<Link>();
