@@ -644,8 +644,10 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Charge le fichier XML reçue en paramètre
-	 * @param file Le fichier XML que l'on veut charger
+	 * Créé l'arbre généalogique à la fois de manière abstraite (Network) et graphique (Graph) de manière récursive
+	 * @param source Le <GraphNode racine de lequel on part pour commencer l'arbre
+	 * @param current Le lien courant, celui que l'on traite actuellement
+	 * @param links La liste des liens contenus dans le Graph
 	 */
 	
 	private GraphNode printGraph(GraphNode source, Link current, List<Link> links)  {
@@ -660,6 +662,11 @@ public class HandlingBinaryTrees {
 		}
 		return source;
 	}
+	
+	/**
+	 * Charge le fichier XML reçue en paramètre
+	 * @param file Le fichier XML que l'on veut charger
+	 */
 	
 	public void loadData(String file) {
 		try{
