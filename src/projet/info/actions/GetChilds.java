@@ -6,6 +6,10 @@ import org.eclipse.swt.widgets.Display;
 
 import projet.info.commandInterpreter.CommandLine;
 
+/**
+ * Classe de récupération des enfants d'un noeud
+ * @author Paul Pidou
+ */
 public class GetChilds implements CommandLine.ICommand {
 	public boolean doIt(Vector v) {
 		System.out.println("Running the command : "+v.elementAt(0).toString());

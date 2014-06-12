@@ -4,6 +4,10 @@ import java.util.Vector;
 import org.eclipse.swt.widgets.Display;
 import projet.info.commandInterpreter.CommandLine;
 
+/**
+ * Classe d'ajout de lien
+ * @author Paul Pidou
+ */
 public class AddLink implements CommandLine.ICommand {
 	public boolean doIt(Vector v) {
 		System.out.println("Running the command : "+v.elementAt(0).toString());
