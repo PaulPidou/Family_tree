@@ -474,8 +474,8 @@ public class HandlingBinaryTrees {
 		
 		if(nodus1 != null && nodus2 != null) {
 			resetColor();
-			nodus1.setBackgroundColor(ColorConstants.red);
-			nodus2.setBackgroundColor(ColorConstants.red);
+			colorSelect(nodus1);
+			colorSelect(nodus2);
 			commonUncles = getCommonUnclesOf(nodus1, nodus2);
 			colorAll(commonUncles);
 		} else {
@@ -567,15 +567,17 @@ public class HandlingBinaryTrees {
 		List<Link> links = new ArrayList<Link>();
 		links = myNetwork.links();
 		
-		GraphNode source = new GraphNode(myGraph, ZestStyles.NONE, String.valueOf(links.get(0).source().getName()));
-		listeNoeuds.add(source);
-		nbrNodes++;
-		
-		for(Link link : links) {
-			if(link.source().equals(links.get(0).source()))
-				printGraph(source, link, links);
+		if(links.size() > 0) {
+			GraphNode source = new GraphNode(myGraph, ZestStyles.NONE, String.valueOf(links.get(0).source().getName()));
+			listeNoeuds.add(source);
+			nbrNodes++;
+			
+			for(Link link : links) {
+				if(link.source().equals(links.get(0).source()))
+					printGraph(source, link, links);
+			}
+			resetColor();
 		}
-		resetColor();
 	}
 	
 }
