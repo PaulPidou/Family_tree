@@ -13,7 +13,7 @@ public class GetChilds implements CommandLine.ICommand {
 		try {
 			v.elementAt(1);
 		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("Cette commande nécessite un paramètre : noeud");
+			System.out.println("Cette commande nÃ©cessite un paramÃ¨tre : noeud");
 			return true;
 		}
 		

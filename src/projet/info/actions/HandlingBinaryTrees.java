@@ -158,25 +158,23 @@ public class HandlingBinaryTrees {
 		myNetwork.addNode(node);
 	}
 	
-	private boolean addLinkGraph(String node1, String node2) {
-		GraphNode source = null, destination = null;
-		String nodeString = "";
-		int found = 2;
+	private GraphNode StringToGraphNode(String nodus) {
 		List<GraphNode> listNodes = new ArrayList<GraphNode>();
 		listNodes = myGraph.getNodes();
 		
 		for(GraphNode node : listNodes) {
-			nodeString = node.toString().substring(16);
-			if(nodeString.equals(node1)) {
-				source = node;
-				found--;
-			} else if(nodeString.equals(node2)) {
-				destination = node;
-				found--;
+			if(node.toString().substring(16).equals(nodus)) {
+				return node;
 			}
-			if(found <= 0) // Leave the loop once we have found the source and the destination
-				break;
 		}
+		return null;
+	}
+	
+	private boolean addLinkGraph(String node1, String node2) {
+		GraphNode source = null, destination = null;
+		
+		source = StringToGraphNode(node1);
+		destination = StringToGraphNode(node2);
 		
 		if(source != null && destination != null) {
 			new GraphConnection(myGraph, ZestStyles.NONE, source, destination);
@@ -265,28 +263,40 @@ public class HandlingBinaryTrees {
 		}
 	}
 	
+	private void colorSelect(GraphNode node) {
+		node.setBackgroundColor(ColorConstants.red);
+	}
+	
+	private void colorAll(List<GraphNode> nodes) {
+		for(GraphNode node : nodes) {
+			node.setBackgroundColor(ColorConstants.green);
+		}
+	}
+	
 	private void colorChilds(GraphNode node) {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
 		listConnection = myGraph.getConnections();
 		
+		List<GraphNode> childs = new ArrayList<GraphNode>();
+		
 		for(GraphConnection connection : listConnection) {
 			if(connection.getSource().equals(node)) {
-				connection.getDestination().setBackgroundColor(ColorConstants.green);
+				childs.add(connection.getDestination());
 			}
 		}
+		colorAll(childs);
 	}
 	
 	public void getChilds(String nodus) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
+		GraphNode node = null;
 		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(nodus)) {
-				resetColor();
-				node.setBackgroundColor(ColorConstants.red);
-				colorChilds(node);
-				break;
-			}
+		node = StringToGraphNode(nodus);
+		if(node != null) {
+			resetColor();
+			colorSelect(node);
+			colorChilds(node);
+		} else {
+			System.out.println("Paramètre non valide.");
 		}
 	}
 	
@@ -304,16 +314,15 @@ public class HandlingBinaryTrees {
 	}
 	
 	public void getDescendants(String nodus) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
+		GraphNode node = null;
 		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(nodus)) {
-				resetColor();
-				node.setBackgroundColor(ColorConstants.red);
-				colorDescendants(node);
-				break;
-			}
+		node = StringToGraphNode(nodus);
+		if(node != null) {
+			resetColor();
+			colorSelect(node);
+			colorDescendants(node);
+		} else {
+			System.out.println("Paramètre non valide.");
 		}
 	}
 	
@@ -331,66 +340,34 @@ public class HandlingBinaryTrees {
 	}
 	
 	public void getAscendants(String nodus) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
+		GraphNode node = null;
 		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(nodus)) {
-				resetColor();
-				node.setBackgroundColor(ColorConstants.red);
-				colorAscendants(node);
-				break;
-			}
+		node = StringToGraphNode(nodus);
+		if(node != null) {
+			resetColor();
+			colorSelect(node);
+			colorAscendants(node);
+		} else {
+			System.out.println("Paramètre non valide.");
 		}
 	}
 	
-	private void colorUncles(GraphNode node) {
+	private List<GraphNode> getFatherOf(GraphNode node)  {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
 		listConnection = myGraph.getConnections();
 		
 		List<GraphNode> fathers = new ArrayList<GraphNode>();
-		List<GraphNode> grandFathers = new ArrayList<GraphNode>();
 		
 		for(GraphConnection connection : listConnection) {
 			if(connection.getDestination().equals(node)) {
 				fathers.add(connection.getSource());
 			}
 		}
+		return fathers;
 		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode father : fathers) {
-				if(connection.getDestination().equals(father)) {
-					grandFathers.add(connection.getSource());
-				}
-			}
-		}
-		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode grandFather : grandFathers) {
-				if(connection.getSource().equals(grandFather)) {
-					if(!fathers.contains(connection.getDestination())) {
-						connection.getDestination().setBackgroundColor(ColorConstants.green);
-					}
-				}
-			}
-		}
 	}
 	
-	public void getUncles(String nodus) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
-		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(nodus)) {
-				resetColor();
-				node.setBackgroundColor(ColorConstants.red);
-				colorUncles(node);
-				break;
-			}
-		}
-	}
-	
-	private void colorCousins(GraphNode node) {
+	private List<GraphNode> getUnclesOf(GraphNode node) {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
 		listConnection = myGraph.getConnections();
 		
@@ -398,18 +375,10 @@ public class HandlingBinaryTrees {
 		List<GraphNode> grandFathers = new ArrayList<GraphNode>();
 		List<GraphNode> uncles = new ArrayList<GraphNode>();
 		
-		for(GraphConnection connection : listConnection) {
-			if(connection.getDestination().equals(node)) {
-				fathers.add(connection.getSource());
-			}
-		}
+		fathers = getFatherOf(node);
 		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode father : fathers) {
-				if(connection.getDestination().equals(father)) {
-					grandFathers.add(connection.getSource());
-				}
-			}
+		for(GraphNode father : fathers) {
+			grandFathers.addAll(getFatherOf(father));
 		}
 		
 		for(GraphConnection connection : listConnection) {
@@ -421,162 +390,133 @@ public class HandlingBinaryTrees {
 				}
 			}
 		}
+		return uncles;
+	}
+	
+	public void getUncles(String nodus) {	
+		List<GraphNode> uncles = new ArrayList<GraphNode>();
+
+		GraphNode node = null;
+		
+		node = StringToGraphNode(nodus);
+		if(node != null) {
+			resetColor();
+			colorSelect(node);
+			uncles = getUnclesOf(node);
+			colorAll(uncles);
+		} else {
+			System.out.println("Paramètre non valide.");
+		}
+	}
+	
+	private List<GraphNode> getCousinsOf(GraphNode node) {
+		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
+		listConnection = myGraph.getConnections();
+		
+		List<GraphNode> uncles = new ArrayList<GraphNode>();
+		List<GraphNode> cousins = new ArrayList<GraphNode>();
+		
+		uncles = getUnclesOf(node);
 		
 		for(GraphConnection connection : listConnection) {
 			for(GraphNode uncle : uncles) {
 				if(connection.getSource().equals(uncle)) {
-					connection.getDestination().setBackgroundColor(ColorConstants.green);
+					cousins.add(connection.getDestination());
 				}
 			}
 		}
+		return cousins;
 	}
 	
-	public void getCousins(String nodus) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
+	public void getCousins(String nodus) {		
+		List<GraphNode> cousins = new ArrayList<GraphNode>();
 		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(nodus)) {
-				resetColor();
-				node.setBackgroundColor(ColorConstants.red);
-				colorCousins(node);
-				break;
-			}
+		GraphNode node = null;
+		
+		node = StringToGraphNode(nodus);
+		if(node != null) {
+			resetColor();
+			colorSelect(node);
+			cousins = getCousinsOf(node);
+			colorAll(cousins);
+		} else {
+			System.out.println("Paramètre non valide.");
 		}
+		
 	}
 	
-	private void colorCommonUncles(GraphNode node1, GraphNode node2) {
-		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
-		listConnection = myGraph.getConnections();
+	private List<GraphNode> getCommonUnclesOf(GraphNode node1, GraphNode node2) {		
+		List<GraphNode> unclesNode1 = new ArrayList<GraphNode>();
+		List<GraphNode> unclesNode2 = new ArrayList<GraphNode>();
 		
-		List<GraphNode> fathers = new ArrayList<GraphNode>();
-		List<GraphNode> grandFathers = new ArrayList<GraphNode>();
+		List<GraphNode> commonUncles = new ArrayList<GraphNode>();
 		
-		for(GraphConnection connection : listConnection) {
-			if(connection.getDestination().equals(node1)) {
-				fathers.add(connection.getSource());
-			} else if(connection.getDestination().equals(node2)) {
-				fathers.add(connection.getSource());
-			}
-		}
+		unclesNode1 = getUnclesOf(node1);
+		unclesNode2 = getUnclesOf(node2);
 		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode father : fathers) {
-				if(connection.getDestination().equals(father)) {
-					grandFathers.add(connection.getSource());
+		for(GraphNode nodus1 : unclesNode1) {
+			for(GraphNode nodus2 : unclesNode2) {
+				if(nodus1.equals(nodus2)) {
+					commonUncles.add(nodus1);
 				}
 			}
 		}
-		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode grandFather : grandFathers) {
-				if(connection.getSource().equals(grandFather)) {
-					if(!fathers.contains(connection.getDestination())) {
-						connection.getDestination().setBackgroundColor(ColorConstants.green);
-					}
-				}
-			}
-		}
+		return commonUncles;
 	}
 	
 	public void getCommonUncles(String node1, String node2) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
+		List<GraphNode> commonUncles = new ArrayList<GraphNode>();
 		
-		int found = 2;
 		GraphNode nodus1 = null, nodus2 = null;
 		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(node1)) {
-				nodus1 = node;
-				found--;
-			} else if(node.toString().substring(16).equals(node2)) {
-				nodus2 = node;
-				found--;
-			}
-			if(found <= 0) {
-				break;
-			}
-		}
+		nodus1 = StringToGraphNode(node1);
+		nodus2 = StringToGraphNode(node2);
 		
-		if(found == 0) {
+		if(nodus1 != null && nodus2 != null) {
 			resetColor();
 			nodus1.setBackgroundColor(ColorConstants.red);
 			nodus2.setBackgroundColor(ColorConstants.red);
-			colorCommonUncles(nodus1, nodus2);
+			commonUncles = getCommonUnclesOf(nodus1, nodus2);
+			colorAll(commonUncles);
 		} else {
 			System.out.println("Paramètres non valides.");
 		}
 	}
 	
-	private void colorCommonCousins(GraphNode node1, GraphNode node2) {
-		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
-		listConnection = myGraph.getConnections();
+	
+	private List<GraphNode> getCommonCousinsOf(GraphNode node1, GraphNode node2) {
+		List<GraphNode> cousinsNode1 = new ArrayList<GraphNode>();
+		List<GraphNode> cousinsNode2 = new ArrayList<GraphNode>();
 		
-		List<GraphNode> fathers = new ArrayList<GraphNode>();
-		List<GraphNode> grandFathers = new ArrayList<GraphNode>();
-		List<GraphNode> uncles = new ArrayList<GraphNode>();
+		List<GraphNode> commonCousins = new ArrayList<GraphNode>();
 		
-		for(GraphConnection connection : listConnection) {
-			if(connection.getDestination().equals(node1)) {
-				fathers.add(connection.getSource());
-			} else if(connection.getDestination().equals(node2)) {
-				fathers.add(connection.getSource());
-			}
-		}
+		cousinsNode1 = getCousinsOf(node1);
+		cousinsNode2 = getCousinsOf(node2);
 		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode father : fathers) {
-				if(connection.getDestination().equals(father)) {
-					grandFathers.add(connection.getSource());
+		for(GraphNode nodus1 : cousinsNode1) {
+			for(GraphNode nodus2 : cousinsNode2) {
+				if(nodus1.equals(nodus2)) {
+					commonCousins.add(nodus1);
 				}
 			}
 		}
-		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode grandFather : grandFathers) {
-				if(connection.getSource().equals(grandFather)) {
-					if(!fathers.contains(connection.getDestination())) {
-						uncles.add(connection.getDestination());
-					}
-				}
-			}
-		}
-		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode uncle : uncles) {
-				if(connection.getSource().equals(uncle)) {
-					connection.getDestination().setBackgroundColor(ColorConstants.green);
-				}
-			}
-		}
+		return commonCousins;
 	}
 	
 	public void getCommonCousins(String node1, String node2) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
+		List<GraphNode> commonCousins = new ArrayList<GraphNode>();
 		
-		int found = 2;
 		GraphNode nodus1 = null, nodus2 = null;
 		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(node1)) {
-				nodus1 = node;
-				found--;
-			} else if(node.toString().substring(16).equals(node2)) {
-				nodus2 = node;
-				found--;
-			}
-			if(found <= 0) {
-				break;
-			}
-		}
+		nodus1 = StringToGraphNode(node1);
+		nodus2 = StringToGraphNode(node2);
 		
-		if(found == 0) {
+		if(nodus1 != null && nodus2 != null) {
 			resetColor();
-			nodus1.setBackgroundColor(ColorConstants.red);
-			nodus2.setBackgroundColor(ColorConstants.red);
-			colorCommonCousins(nodus1, nodus2);
+			colorSelect(nodus1);
+			colorSelect(nodus2);
+			commonCousins = getCommonCousinsOf(nodus1, nodus2);
+			colorAll(commonCousins);
 		} else {
 			System.out.println("Paramètres non valides.");
 		}

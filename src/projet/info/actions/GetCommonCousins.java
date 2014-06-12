@@ -12,7 +12,7 @@ public class GetCommonCousins implements CommandLine.ICommand {
 			v.elementAt(1);
 			v.elementAt(2);
 		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("Cette commande n�cessite un param�tre : noeud");
+			System.out.println("Cette commande nécessite un paramètre : noeud");
 			return true;
 		}
 		
