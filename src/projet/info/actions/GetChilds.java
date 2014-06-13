@@ -6,6 +6,10 @@ import org.eclipse.swt.widgets.Display;
 
 import projet.info.commandInterpreter.CommandLine;
 
+/**
+ * Classe de récupération des enfants d'un noeud
+ * @author Paul Pidou
+ */
 public class GetChilds implements CommandLine.ICommand {
 	public boolean doIt(Vector v) {
 		System.out.println("Running the command : "+v.elementAt(0).toString());
@@ -13,7 +17,7 @@ public class GetChilds implements CommandLine.ICommand {
 		try {
 			v.elementAt(1);
 		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("Cette commande n�cessite un param�tre : noeud");
+			System.out.println("Cette commande nécessite un paramètre : noeud");
 			return true;
 		}
 		

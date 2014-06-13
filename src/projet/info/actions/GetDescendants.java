@@ -4,6 +4,10 @@ import java.util.Vector;
 import org.eclipse.swt.widgets.Display;
 import projet.info.commandInterpreter.CommandLine;
 
+/**
+ * Classe de récupération des descendants d'un noeud
+ * @author Paul Pidou
+ */
 public class GetDescendants implements CommandLine.ICommand {
 	public boolean doIt(Vector v) {
 		System.out.println("Running the command : "+v.elementAt(0).toString());

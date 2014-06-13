@@ -149,6 +149,9 @@ public class HandlingBinaryTrees {
 		myShell.layout();
 	}
 	
+	/**
+	 * Ajoute un noeud à myGraph et à myNetwork
+	 */
 	public void addNode() {
 		GraphNode gn = new GraphNode(myGraph, ZestStyles.NONE,String.valueOf(nbrNodes));
 		gn.setBackgroundColor(ColorConstants.cyan);
@@ -158,33 +161,50 @@ public class HandlingBinaryTrees {
 		myNetwork.addNode(node);
 	}
 	
-	private boolean addLinkGraph(String node1, String node2) {
-		GraphNode source = null, destination = null;
-		String nodeString = "";
-		int found = 2;
+	/**
+	 * Convertit une String reçue en un GraphNode correspondant
+	 * @param nodus La String à convertir
+	 * @return Le GraphNode correspondant à la String sinon null
+	 */
+	private GraphNode StringToGraphNode(String nodus) {
 		List<GraphNode> listNodes = new ArrayList<GraphNode>();
 		listNodes = myGraph.getNodes();
 		
 		for(GraphNode node : listNodes) {
-			nodeString = node.toString().substring(16);
-			if(nodeString.equals(node1)) {
-				source = node;
-				found--;
-			} else if(nodeString.equals(node2)) {
-				destination = node;
-				found--;
+			if(node.toString().substring(16).equals(nodus)) {
+				return node;
 			}
-			if(found <= 0) // Leave the loop once we have found the source and the destination
-				break;
 		}
+		return null;
+	}
+	
+	/**
+	 * Ajoute un lien(GraphConnection) à myGraph entre deux noeuds (GraphNode)
+	 * @param node1 Le noeud source sous forme de String
+	 * @param node2 Le noeud destination sous forme de String
+	 * @return vrai(true) si la connexion a été faite avec succès ou faux(false) si au moins un des deux noeuds n'a pas été trouvé
+	 */
+	private boolean addLinkGraph(String node1, String node2) {
+		GraphNode source = null, destination = null;
+		
+		source = StringToGraphNode(node1);
+		destination = StringToGraphNode(node2);
 		
 		if(source != null && destination != null) {
-			new GraphConnection(myGraph, ZestStyles.NONE, source, destination);
+			GraphConnection gc = new GraphConnection(myGraph, ZestStyles.CONNECTIONS_DIRECTED, source, destination);
+			gc.changeLineColor(myGraph.getDisplay().getSystemColor(SWT.COLOR_RED));
+			gc.setLineWidth(2);
 			return true;
 		} else
 			return false;
 	}
 	
+	/**
+	 * Ajoute un lien(link) à myNetowrk entre deux noeuds (node)
+	 * @param node1 Le noeud source sous forme de String
+	 * @param node2 Le noeud destination sous forme de String
+	 * @return vrai(true) si la connexion a été faite avec succès ou faux(false) si au moins un des deux noeuds n'a pas été trouvé
+	 */
 	private boolean addLinkNetwork(String node1, String node2) {
 		Node source = null, destination = null;
 		String nodeString = "";
@@ -212,13 +232,24 @@ public class HandlingBinaryTrees {
 			return false;
 	}
 	
+	/**
+	 * Essaye d'ajouter un lien entre deux noeuds et indique si cela a été effectué ou non
+	 * @param node1 Le noeud source sous forme de String
+	 * @param node2 Le noeud destination sous forme de String
+	 */
 	public void addLink(String node1, String node2) {
 		if(addLinkGraph(node1, node2) && addLinkNetwork(node1, node2))
-			System.out.println("Liaison cr��e avec succ�s.");
+			System.out.println("Liaison créée avec succès.");
 		 else
-			System.out.println("Param�tres non valides.");
+			System.out.println("Paramètres non valides.");
 	}
 	
+	/**
+	 * Supprime un lien(GraphConnection) de myGraph entre deux noeuds (GraphNode)
+	 * @param node1 Le noeud source sous forme de String
+	 * @param node2 Le noeud destination sous forme de String
+	 * @return vrai(true) si la connexion a été supprimé avec succès ou faux(false) si la connexion n'a pas été trouvé
+	 */
 	private boolean deleteLinkGraph(String node1, String node2) {
 		String sourceString, destinationString;
 		List<GraphConnection> listConnections = new ArrayList<GraphConnection>();
@@ -236,6 +267,12 @@ public class HandlingBinaryTrees {
 		return false;
 	}
 	
+	/**
+	 * Supprime un lien(link) de myNetwork entre deux noeuds (node)
+	 * @param node1 Le noeud source sous forme de String
+	 * @param node2 Le noeud destination sous forme de String
+	 * @return vrai(true) si la connexion à été supprimé avec succès ou faux(false) si la connexion n'a pas été trouvé
+	 */
 	private boolean deleteLinkNetwork(String node1, String node2) {
 		List<Link> listLinks = new ArrayList<Link>();
 		listLinks = myNetwork.links();
@@ -249,13 +286,21 @@ public class HandlingBinaryTrees {
 		return false;
 	}
 	
+	/**
+	 * Essaye de supprimer un lien entre deux noeuds et indique si cela a été effectué ou non
+	 * @param node1 Le noeud source sous forme de String
+	 * @param node2 Le noeud destination sous forme de String
+	 */
 	public void deleteLink(String node1, String node2) {
 		if(deleteLinkGraph(node1, node2) && deleteLinkNetwork(node1, node2))
-			System.out.println("Liaison supprim�e avec succ�s.");
+			System.out.println("Liaison supprimée avec succès.");
 		 else
-			System.out.println("Param�tres non valides.");
+			System.out.println("Paramètres non valides.");
 	}
 	
+	/**
+	 * Remet tous les noeuds (GraphNode) de myGraph à la même couleur
+	 */
 	private void resetColor() {
 		List<GraphNode> listNodes = new ArrayList<GraphNode>();
 		listNodes = myGraph.getNodes();
@@ -265,31 +310,64 @@ public class HandlingBinaryTrees {
 		}
 	}
 	
+	/**
+	 * Met le noeud (GraphNode) envoyé en paramètre en rouge
+	 * @param node Le noeud à mettre en rouge
+	 */
+	private void colorSelect(GraphNode node) {
+		node.setBackgroundColor(ColorConstants.red);
+	}
+	
+	/**
+	 * Met les noeuds (GraphNode) envoyés en paramètre en vert
+	 * @param nodes Liste des noeuds à mettre en vert
+	 */
+	private void colorAll(List<GraphNode> nodes) {
+		for(GraphNode node : nodes) {
+			node.setBackgroundColor(ColorConstants.green);
+		}
+	}
+	
+	/**
+	 * Affiche les fils d'un noeud donné
+	 * @param node Le noeud dont on doit afficher les enfants
+	 */
 	private void colorChilds(GraphNode node) {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
 		listConnection = myGraph.getConnections();
 		
+		List<GraphNode> childs = new ArrayList<GraphNode>();
+		
 		for(GraphConnection connection : listConnection) {
 			if(connection.getSource().equals(node)) {
-				connection.getDestination().setBackgroundColor(ColorConstants.green);
+				childs.add(connection.getDestination()); // On met les enfants de node dans une liste
 			}
 		}
+		colorAll(childs); // On met en vert les enfants
 	}
-	
+
+	/**
+	 * Récupère les enfants d'un noeud donné
+	 * @param nodus Le noeud dont on veut récupèrer les enfants
+	 */
 	public void getChilds(String nodus) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
+		GraphNode node = null;
+		node = StringToGraphNode(nodus);
 		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(nodus)) {
-				resetColor();
-				node.setBackgroundColor(ColorConstants.red);
-				colorChilds(node);
-				break;
-			}
+		if(node != null) {
+			resetColor();
+			colorSelect(node); // On met en rouge le noeud sélectionné
+			colorChilds(node); // On met en vert les enfants du noeud sélectionné
+		} else {
+			System.out.println("Paramètre non valide."); // On indique que l'on n'a pas trouvé le noeud dont on veut afficher les fils
 		}
 	}
 	
+	/**
+	 * Met en couleur tous les descendants d'un noeud donné par récursivité
+	 * @param node Le noeud dont on veut les descendants
+	 * @return Le GraphNode node pour permettre la récursivité
+	 */
 	private GraphNode colorDescendants(GraphNode node) {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
 		listConnection = myGraph.getConnections();
@@ -303,20 +381,28 @@ public class HandlingBinaryTrees {
 		return node;
 	}
 	
+	/**
+	 * Récupère tous les descendants d'un noeud donné
+	 * @param nodus Le noeud dont on veut les descendants
+	 */
 	public void getDescendants(String nodus) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
+		GraphNode node = null;
 		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(nodus)) {
-				resetColor();
-				node.setBackgroundColor(ColorConstants.red);
-				colorDescendants(node);
-				break;
-			}
+		node = StringToGraphNode(nodus);
+		if(node != null) {
+			resetColor();
+			colorSelect(node); // On met en rouge le noeud sélectionné
+			colorDescendants(node); // On met en vert les descendants du noeud sélectionné
+		} else {
+			System.out.println("Paramètre non valide.");
 		}
 	}
 	
+	/**
+	 * Met en couleur tous les ascendants d'un noeud donné par récursivité
+	 * @param node Le noeud dont on veut les ascendants
+	 * @return Le GraphNode node pour permettre la récursivité
+	 */
 	private GraphNode colorAscendants(GraphNode node) {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
 		listConnection = myGraph.getConnections();
@@ -330,67 +416,48 @@ public class HandlingBinaryTrees {
 		return node;
 	}
 	
+	/**
+	 * Récupère tous les ascendants d'un noeud donné
+	 * @param nodus Le noeud dont on veut les ascendants
+	 */
 	public void getAscendants(String nodus) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
+		GraphNode node = null;
 		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(nodus)) {
-				resetColor();
-				node.setBackgroundColor(ColorConstants.red);
-				colorAscendants(node);
-				break;
-			}
+		node = StringToGraphNode(nodus);
+		if(node != null) {
+			resetColor();
+			colorSelect(node);
+			colorAscendants(node);
+		} else {
+			System.out.println("Paramètre non valide.");
 		}
 	}
 	
-	private void colorUncles(GraphNode node) {
+	/**
+	 * Récupère les pères d'un noeud donné
+	 * @param node Le noeud (GraphNode) dont on veut les pères
+	 * @return La liste contenant les pères du noeud donné
+	 */
+	private List<GraphNode> getFatherOf(GraphNode node)  {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
 		listConnection = myGraph.getConnections();
 		
 		List<GraphNode> fathers = new ArrayList<GraphNode>();
-		List<GraphNode> grandFathers = new ArrayList<GraphNode>();
 		
 		for(GraphConnection connection : listConnection) {
 			if(connection.getDestination().equals(node)) {
 				fathers.add(connection.getSource());
 			}
 		}
-		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode father : fathers) {
-				if(connection.getDestination().equals(father)) {
-					grandFathers.add(connection.getSource());
-				}
-			}
-		}
-		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode grandFather : grandFathers) {
-				if(connection.getSource().equals(grandFather)) {
-					if(!fathers.contains(connection.getDestination())) {
-						connection.getDestination().setBackgroundColor(ColorConstants.green);
-					}
-				}
-			}
-		}
+		return fathers;
 	}
 	
-	public void getUncles(String nodus) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
-		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(nodus)) {
-				resetColor();
-				node.setBackgroundColor(ColorConstants.red);
-				colorUncles(node);
-				break;
-			}
-		}
-	}
-	
-	private void colorCousins(GraphNode node) {
+	/**
+	 * Récupère les oncles d'un noeud donné
+	 * @param node Le noeud (GraphNode) dont on veut les oncles
+	 * @return La liste contenant les oncles du noeud donné
+	 */
+	private List<GraphNode> getUnclesOf(GraphNode node) {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
 		listConnection = myGraph.getConnections();
 		
@@ -398,18 +465,10 @@ public class HandlingBinaryTrees {
 		List<GraphNode> grandFathers = new ArrayList<GraphNode>();
 		List<GraphNode> uncles = new ArrayList<GraphNode>();
 		
-		for(GraphConnection connection : listConnection) {
-			if(connection.getDestination().equals(node)) {
-				fathers.add(connection.getSource());
-			}
-		}
+		fathers = getFatherOf(node); // ON récupère les pères du noeud
 		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode father : fathers) {
-				if(connection.getDestination().equals(father)) {
-					grandFathers.add(connection.getSource());
-				}
-			}
+		for(GraphNode father : fathers) {
+			grandFathers.addAll(getFatherOf(father)); // On récupère les grand père du noeud (pères des pères)
 		}
 		
 		for(GraphConnection connection : listConnection) {
@@ -421,172 +480,185 @@ public class HandlingBinaryTrees {
 				}
 			}
 		}
+		return uncles;
+	}
+	
+	/**
+	 * Récupère et met en couleurs les oncles d'un noeud donné
+	 * @param nodus Le noeud (GraphNode) dont on veut les oncles
+	 */
+	public void getUncles(String nodus) {	
+		List<GraphNode> uncles = new ArrayList<GraphNode>();
+
+		GraphNode node = null;
+		node = StringToGraphNode(nodus);
+		
+		if(node != null) {
+			resetColor();
+			colorSelect(node);
+			uncles = getUnclesOf(node);
+			colorAll(uncles);
+		} else {
+			System.out.println("Paramètre non valide.");
+		}
+	}
+	
+	/**
+	 * Récupère les cousins d'un noeud donné
+	 * @param node Le noeud (GraphNode) dont on veut les cousins
+	 * @return La liste contenant les cousins du noeud donné
+	 */
+	private List<GraphNode> getCousinsOf(GraphNode node) {
+		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
+		listConnection = myGraph.getConnections();
+		
+		List<GraphNode> uncles = new ArrayList<GraphNode>();
+		List<GraphNode> cousins = new ArrayList<GraphNode>();
+		
+		uncles = getUnclesOf(node);
 		
 		for(GraphConnection connection : listConnection) {
 			for(GraphNode uncle : uncles) {
 				if(connection.getSource().equals(uncle)) {
-					connection.getDestination().setBackgroundColor(ColorConstants.green);
+					cousins.add(connection.getDestination());
 				}
 			}
 		}
+		return cousins;
 	}
 	
-	public void getCousins(String nodus) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
+	/**
+	 * Récupère et met en couleur les cousins d'un noeud donné
+	 * @param nodus Le noeud (GraphNode) dont on veut les cousins
+	 */
+	public void getCousins(String nodus) {		
+		List<GraphNode> cousins = new ArrayList<GraphNode>();
 		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(nodus)) {
-				resetColor();
-				node.setBackgroundColor(ColorConstants.red);
-				colorCousins(node);
-				break;
-			}
+		GraphNode node = null;
+		
+		node = StringToGraphNode(nodus);
+		if(node != null) {
+			resetColor();
+			colorSelect(node);
+			cousins = getCousinsOf(node);
+			colorAll(cousins);
+		} else {
+			System.out.println("Paramètre non valide.");
 		}
 	}
 	
-	private void colorCommonUncles(GraphNode node1, GraphNode node2) {
-		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
-		listConnection = myGraph.getConnections();
+	/**
+	 * Récupère les oncles en commun de deux noeuds donnés
+	 * @param node1 Le noeud (GraphNode) dont on veut les oncles en commun
+	 * @param node2 Le noeud (GraphNode) dont on veut les oncles en commun
+	 * @return La liste contenant les oncles en commun de noeuds donnés
+	 */
+	private List<GraphNode> getCommonUnclesOf(GraphNode node1, GraphNode node2) {		
+		List<GraphNode> unclesNode1 = new ArrayList<GraphNode>();
+		List<GraphNode> unclesNode2 = new ArrayList<GraphNode>();
 		
-		List<GraphNode> fathers = new ArrayList<GraphNode>();
-		List<GraphNode> grandFathers = new ArrayList<GraphNode>();
+		List<GraphNode> commonUncles = new ArrayList<GraphNode>();
 		
-		for(GraphConnection connection : listConnection) {
-			if(connection.getDestination().equals(node1)) {
-				fathers.add(connection.getSource());
-			} else if(connection.getDestination().equals(node2)) {
-				fathers.add(connection.getSource());
-			}
-		}
+		unclesNode1 = getUnclesOf(node1);
+		unclesNode2 = getUnclesOf(node2);
 		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode father : fathers) {
-				if(connection.getDestination().equals(father)) {
-					grandFathers.add(connection.getSource());
+		for(GraphNode nodus1 : unclesNode1) {
+			for(GraphNode nodus2 : unclesNode2) {
+				if(nodus1.equals(nodus2)) {
+					commonUncles.add(nodus1);
 				}
 			}
 		}
-		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode grandFather : grandFathers) {
-				if(connection.getSource().equals(grandFather)) {
-					if(!fathers.contains(connection.getDestination())) {
-						connection.getDestination().setBackgroundColor(ColorConstants.green);
-					}
-				}
-			}
-		}
+		return commonUncles;
 	}
 	
+	/**
+	 * Récupère et met en couleur les oncles en commun de deux noeuds donnés
+	 * @param node1 Le noeud (GraphNode) dont on veut les oncles en commun
+	 * @param node2 Le noeud (GraphNode) dont on veut les oncles en commun
+	 */
 	public void getCommonUncles(String node1, String node2) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
+		List<GraphNode> commonUncles = new ArrayList<GraphNode>();
 		
-		int found = 2;
 		GraphNode nodus1 = null, nodus2 = null;
 		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(node1)) {
-				nodus1 = node;
-				found--;
-			} else if(node.toString().substring(16).equals(node2)) {
-				nodus2 = node;
-				found--;
-			}
-			if(found <= 0) {
-				break;
-			}
-		}
+		nodus1 = StringToGraphNode(node1);
+		nodus2 = StringToGraphNode(node2);
 		
-		if(found == 0) {
+		if(nodus1 != null && nodus2 != null) {
 			resetColor();
-			nodus1.setBackgroundColor(ColorConstants.red);
-			nodus2.setBackgroundColor(ColorConstants.red);
-			colorCommonUncles(nodus1, nodus2);
+			colorSelect(nodus1);
+			colorSelect(nodus2);
+			commonUncles = getCommonUnclesOf(nodus1, nodus2);
+			colorAll(commonUncles);
 		} else {
-			System.out.println("Param�tres non valides.");
+			System.out.println("Paramètres non valides.");
 		}
 	}
 	
-	private void colorCommonCousins(GraphNode node1, GraphNode node2) {
-		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
-		listConnection = myGraph.getConnections();
+	/**
+	 * Récupère les cousins en commun de deux noeuds donnés
+	 * @param node1 Le noeud (GraphNode) dont on veut les cousins en commun
+	 * @param node2 Le noeud (GraphNode) dont on veut les cousins en commun
+	 * @return La liste contenant les cousins en commun de noeuds donnés
+	 */
+	private List<GraphNode> getCommonCousinsOf(GraphNode node1, GraphNode node2) {
+		List<GraphNode> cousinsNode1 = new ArrayList<GraphNode>();
+		List<GraphNode> cousinsNode2 = new ArrayList<GraphNode>();
 		
-		List<GraphNode> fathers = new ArrayList<GraphNode>();
-		List<GraphNode> grandFathers = new ArrayList<GraphNode>();
-		List<GraphNode> uncles = new ArrayList<GraphNode>();
+		List<GraphNode> commonCousins = new ArrayList<GraphNode>();
 		
-		for(GraphConnection connection : listConnection) {
-			if(connection.getDestination().equals(node1)) {
-				fathers.add(connection.getSource());
-			} else if(connection.getDestination().equals(node2)) {
-				fathers.add(connection.getSource());
-			}
-		}
+		cousinsNode1 = getCousinsOf(node1);
+		cousinsNode2 = getCousinsOf(node2);
 		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode father : fathers) {
-				if(connection.getDestination().equals(father)) {
-					grandFathers.add(connection.getSource());
+		for(GraphNode nodus1 : cousinsNode1) {
+			for(GraphNode nodus2 : cousinsNode2) {
+				if(nodus1.equals(nodus2)) {
+					commonCousins.add(nodus1);
 				}
 			}
 		}
-		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode grandFather : grandFathers) {
-				if(connection.getSource().equals(grandFather)) {
-					if(!fathers.contains(connection.getDestination())) {
-						uncles.add(connection.getDestination());
-					}
-				}
-			}
-		}
-		
-		for(GraphConnection connection : listConnection) {
-			for(GraphNode uncle : uncles) {
-				if(connection.getSource().equals(uncle)) {
-					connection.getDestination().setBackgroundColor(ColorConstants.green);
-				}
-			}
-		}
+		return commonCousins;
 	}
 	
+	/**
+	 * Récupère et met en couleur les cousins en commun de deux noeuds donnés
+	 * @param node1 Le noeud (GraphNode) dont on veut les cousins en commun
+	 * @param node2 Le noeud (GraphNode) dont on veut les cousins en commun
+	 */
 	public void getCommonCousins(String node1, String node2) {
-		List<GraphNode> listNodes = new ArrayList<GraphNode>();
-		listNodes = myGraph.getNodes();
+		List<GraphNode> commonCousins = new ArrayList<GraphNode>();
 		
-		int found = 2;
 		GraphNode nodus1 = null, nodus2 = null;
 		
-		for(GraphNode node : listNodes) {
-			if(node.toString().substring(16).equals(node1)) {
-				nodus1 = node;
-				found--;
-			} else if(node.toString().substring(16).equals(node2)) {
-				nodus2 = node;
-				found--;
-			}
-			if(found <= 0) {
-				break;
-			}
-		}
+		nodus1 = StringToGraphNode(node1);
+		nodus2 = StringToGraphNode(node2);
 		
-		if(found == 0) {
+		if(nodus1 != null && nodus2 != null) {
 			resetColor();
-			nodus1.setBackgroundColor(ColorConstants.red);
-			nodus2.setBackgroundColor(ColorConstants.red);
-			colorCommonCousins(nodus1, nodus2);
+			colorSelect(nodus1);
+			colorSelect(nodus2);
+			commonCousins = getCommonCousinsOf(nodus1, nodus2);
+			colorAll(commonCousins);
 		} else {
-			System.out.println("Param�tres non valides.");
+			System.out.println("Paramètres non valides.");
 		}
 	}
+	
+	/**
+	 * Créé l'arbre généalogique à la fois de manière abstraite (Network) et graphique (Graph) de manière récursive
+	 * @param source Le <GraphNode racine de lequel on part pour commencer l'arbre
+	 * @param current Le lien courant, celui que l'on traite actuellement
+	 * @param links La liste des liens contenus dans le Graph
+	 */
 	
 	private GraphNode printGraph(GraphNode source, Link current, List<Link> links)  {
 		GraphNode destination = new GraphNode(myGraph, ZestStyles.NONE, String.valueOf(current.destination().getName()));
 		listeNoeuds.add(destination);
 		nbrNodes++;
-		new GraphConnection(myGraph, ZestStyles.NONE, source, destination);
+		GraphConnection gc = new GraphConnection(myGraph, ZestStyles.CONNECTIONS_DIRECTED, source, destination);
+		gc.changeLineColor(myGraph.getDisplay().getSystemColor(SWT.COLOR_RED));
+		gc.setLineWidth(2);
 		for(Link i : links) {
 			if(current.destination().equals(i.source())) {
 				printGraph(destination, i, links);
@@ -595,47 +667,55 @@ public class HandlingBinaryTrees {
 		return source;
 	}
 	
+	/**
+	 * Charge le fichier XML reçue en paramètre
+	 * @param file Le fichier XML que l'on veut charger
+	 */
+	
 	public void loadData(String file) {
 		try{
-			// cr�ation d'une fabrique de parseurs SAX
+			// création d'une fabrique de parseurs SAX
 			SAXParserFactory fabrique = SAXParserFactory.newInstance();
 
-			// cr�ation d'un parseur SAX
+			// création d'un parseur SAX
 			SAXParser parseur = fabrique.newSAXParser();
 
 			// lecture d'un fichier XML avec un DefaultHandler
 			file = "./"+file;
 			File fichier = new File(file);
-			if(!fichier.exists()) {
-				System.out.println("Le fichier sp�cifi� n'existe pas. Chargement du fichier par d�faut !");
+			if(!fichier.exists()) { // Si le fichier n'existe pas on charge le fichier par défaut
+				System.out.println("Le fichier spécifié n'existe pas. Chargement du fichier par défaut !");
 				fichier = new File("file.xml");
 			}
+			myNetwork.clear();
 			DefaultHandler gestionnaire = new MyHandler(myNetwork);
 			parseur.parse(fichier, gestionnaire);
 			
 		}catch(ParserConfigurationException pce){
 			System.out.println("Erreur de configuration du parseur");
-			System.out.println("Lors de l'appel � newSAXParser()");
+			System.out.println("Lors de l'appel à newSAXParser()");
 		}catch(SAXException se){
 			System.out.println("Erreur de parsing");
-			System.out.println("Lors de l'appel � parse()");
+			System.out.println("Lors de l'appel à parse()");
 		}catch(IOException ioe){
-			System.out.println("Erreur d'entr�e/sortie");
-			System.out.println("Lors de l'appel � parse()");
+			System.out.println("Erreur d'entrée/sortie");
+			System.out.println("Lors de l'appel à parse()");
 		}
 		
 		List<Link> links = new ArrayList<Link>();
 		links = myNetwork.links();
 		
-		GraphNode source = new GraphNode(myGraph, ZestStyles.NONE, String.valueOf(links.get(0).source().getName()));
-		listeNoeuds.add(source);
-		nbrNodes++;
-		
-		for(Link link : links) {
-			if(link.source().equals(links.get(0).source()))
-				printGraph(source, link, links);
+		if(links.size() > 0) {
+			GraphNode source = new GraphNode(myGraph, ZestStyles.NONE, String.valueOf(links.get(0).source().getName()));
+			listeNoeuds.add(source);
+			nbrNodes++;
+			
+			for(Link link : links) {
+				if(link.source().equals(links.get(0).source()))
+					printGraph(source, link, links);
+			}
+			resetColor();
 		}
-		resetColor();
 	}
 	
 }
