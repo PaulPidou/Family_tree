@@ -150,7 +150,7 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Ajoute un noeud à myGraph et à myNetwork
+	 * Ajoute un noeud ï¿½ myGraph et ï¿½ myNetwork
 	 */
 	public void addNode() {
 		GraphNode gn = new GraphNode(myGraph, ZestStyles.NONE,String.valueOf(nbrNodes));
@@ -162,9 +162,9 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Convertit une String reçue en un GraphNode correspondant
-	 * @param nodus La String à convertir
-	 * @return Le GraphNode correspondant à la String sinon null
+	 * Convertit une String reï¿½ue en un GraphNode correspondant
+	 * @param nodus La String ï¿½ convertir
+	 * @return Le GraphNode correspondant ï¿½ la String sinon null
 	 */
 	private GraphNode StringToGraphNode(String nodus) {
 		List<GraphNode> listNodes = new ArrayList<GraphNode>();
@@ -179,10 +179,10 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Ajoute un lien(GraphConnection) à myGraph entre deux noeuds (GraphNode)
+	 * Ajoute un lien(GraphConnection) ï¿½ myGraph entre deux noeuds (GraphNode)
 	 * @param node1 Le noeud source sous forme de String
 	 * @param node2 Le noeud destination sous forme de String
-	 * @return vrai(true) si la connexion à été faite avec sucès ou faux(false) si au moins un des deux noeuds n'a pas été trouvé
+	 * @return vrai(true) si la connexion ï¿½ ï¿½tï¿½ faite avec sucï¿½s ou faux(false) si au moins un des deux noeuds n'a pas ï¿½tï¿½ trouvï¿½
 	 */
 	private boolean addLinkGraph(String node1, String node2) {
 		GraphNode source = null, destination = null;
@@ -191,17 +191,19 @@ public class HandlingBinaryTrees {
 		destination = StringToGraphNode(node2);
 		
 		if(source != null && destination != null) {
-			new GraphConnection(myGraph, ZestStyles.NONE, source, destination);
+			GraphConnection gc = new GraphConnection(myGraph, ZestStyles.CONNECTIONS_DIRECTED, source, destination);
+			gc.changeLineColor(myGraph.getDisplay().getSystemColor(SWT.COLOR_RED));
+			gc.setLineWidth(3);
 			return true;
 		} else
 			return false;
 	}
 	
 	/**
-	 * Ajoute un lien(link) à myNetowrk entre deux noeuds (node)
+	 * Ajoute un lien(link) ï¿½ myNetowrk entre deux noeuds (node)
 	 * @param node1 Le noeud source sous forme de String
 	 * @param node2 Le noeud destination sous forme de String
-	 * @return vrai(true) si la connexion à été faite avec sucès ou faux(false) si au moins un des deux noeuds n'a pas été trouvé
+	 * @return vrai(true) si la connexion ï¿½ ï¿½tï¿½ faite avec sucï¿½s ou faux(false) si au moins un des deux noeuds n'a pas ï¿½tï¿½ trouvï¿½
 	 */
 	private boolean addLinkNetwork(String node1, String node2) {
 		Node source = null, destination = null;
@@ -231,22 +233,22 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Essaye d'ajouter un lien entre deux noeuds et indique si cela a été effectué ou non
+	 * Essaye d'ajouter un lien entre deux noeuds et indique si cela a ï¿½tï¿½ effectuï¿½ ou non
 	 * @param node1 Le noeud source sous forme de String
 	 * @param node2 Le noeud destination sous forme de String
 	 */
 	public void addLink(String node1, String node2) {
 		if(addLinkGraph(node1, node2) && addLinkNetwork(node1, node2))
-			System.out.println("Liaison créée avec succès.");
+			System.out.println("Liaison crï¿½ï¿½e avec succï¿½s.");
 		 else
-			System.out.println("Paramètres non valides.");
+			System.out.println("Paramï¿½tres non valides.");
 	}
 	
 	/**
 	 * Supprime un lien(GraphConnection) de myGraph entre deux noeuds (GraphNode)
 	 * @param node1 Le noeud source sous forme de String
 	 * @param node2 Le noeud destination sous forme de String
-	 * @return vrai(true) si la connexion à été supprimé avec sucès ou faux(false) si la connexion n'a pas été trouvé
+	 * @return vrai(true) si la connexion ï¿½ ï¿½tï¿½ supprimï¿½ avec sucï¿½s ou faux(false) si la connexion n'a pas ï¿½tï¿½ trouvï¿½
 	 */
 	private boolean deleteLinkGraph(String node1, String node2) {
 		String sourceString, destinationString;
@@ -269,7 +271,7 @@ public class HandlingBinaryTrees {
 	 * Supprime un lien(link) de myNetwork entre deux noeuds (node)
 	 * @param node1 Le noeud source sous forme de String
 	 * @param node2 Le noeud destination sous forme de String
-	 * @return vrai(true) si la connexion à été supprimé avec sucès ou faux(false) si la connexion n'a pas été trouvé
+	 * @return vrai(true) si la connexion ï¿½ ï¿½tï¿½ supprimï¿½ avec sucï¿½s ou faux(false) si la connexion n'a pas ï¿½tï¿½ trouvï¿½
 	 */
 	private boolean deleteLinkNetwork(String node1, String node2) {
 		List<Link> listLinks = new ArrayList<Link>();
@@ -285,19 +287,19 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Essaye de supprimer un lien entre deux noeuds et indique si cela a été effectué ou non
+	 * Essaye de supprimer un lien entre deux noeuds et indique si cela a ï¿½tï¿½ effectuï¿½ ou non
 	 * @param node1 Le noeud source sous forme de String
 	 * @param node2 Le noeud destination sous forme de String
 	 */
 	public void deleteLink(String node1, String node2) {
 		if(deleteLinkGraph(node1, node2) && deleteLinkNetwork(node1, node2))
-			System.out.println("Liaison supprimée avec succès.");
+			System.out.println("Liaison supprimï¿½e avec succï¿½s.");
 		 else
-			System.out.println("Paramètres non valides.");
+			System.out.println("Paramï¿½tres non valides.");
 	}
 	
 	/**
-	 * Remet tous les noeuds (GraphNode) de myGraph à la même couleur
+	 * Remet tous les noeuds (GraphNode) de myGraph ï¿½ la mï¿½me couleur
 	 */
 	private void resetColor() {
 		List<GraphNode> listNodes = new ArrayList<GraphNode>();
@@ -309,16 +311,16 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Met le noeud (GraphNode) envoyé en paramètre en rouge
-	 * @param node Le noeud à mettre en rouge
+	 * Met le noeud (GraphNode) envoyï¿½ en paramï¿½tre en rouge
+	 * @param node Le noeud ï¿½ mettre en rouge
 	 */
 	private void colorSelect(GraphNode node) {
 		node.setBackgroundColor(ColorConstants.red);
 	}
 	
 	/**
-	 * Met les noeuds (GraphNode) envoyés en paramètre en vert
-	 * @param nodes Liste des noeuds à mettre en vert
+	 * Met les noeuds (GraphNode) envoyï¿½s en paramï¿½tre en vert
+	 * @param nodes Liste des noeuds ï¿½ mettre en vert
 	 */
 	private void colorAll(List<GraphNode> nodes) {
 		for(GraphNode node : nodes) {
@@ -327,7 +329,7 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Affiche les fils d'un noeud donné
+	 * Affiche les fils d'un noeud donnï¿½
 	 * @param node Le noeud dont on doit afficher les enfants
 	 */
 	private void colorChilds(GraphNode node) {
@@ -345,8 +347,8 @@ public class HandlingBinaryTrees {
 	}
 
 	/**
-	 * Récupère les enfants d'un noeud donné
-	 * @param nodus Le noeud dont on veut récupérer les enfants
+	 * Rï¿½cupï¿½re les enfants d'un noeud donnï¿½
+	 * @param nodus Le noeud dont on veut rï¿½cupï¿½rer les enfants
 	 */
 	public void getChilds(String nodus) {
 		GraphNode node = null;
@@ -354,17 +356,17 @@ public class HandlingBinaryTrees {
 		
 		if(node != null) {
 			resetColor();
-			colorSelect(node); // On met en rouge le noeud sélectionné
-			colorChilds(node); // On met en vert les enfants du noeud sélectionné
+			colorSelect(node); // On met en rouge le noeud sï¿½lectionnï¿½
+			colorChilds(node); // On met en vert les enfants du noeud sï¿½lectionnï¿½
 		} else {
-			System.out.println("Paramètre non valide."); // On indique que l'on n'a pas trouvé le noeud dont on veut afficher les fils
+			System.out.println("Paramï¿½tre non valide."); // On indique que l'on n'a pas trouvï¿½ le noeud dont on veut afficher les fils
 		}
 	}
 	
 	/**
-	 * Met en couleur tous les descendants d'un noeud donné par récursivité
+	 * Met en couleur tous les descendants d'un noeud donnï¿½ par rï¿½cursivitï¿½
 	 * @param node Le noeud dont on veut les descendants
-	 * @return Le GraphNode node pour permettre la récursivité
+	 * @return Le GraphNode node pour permettre la rï¿½cursivitï¿½
 	 */
 	private GraphNode colorDescendants(GraphNode node) {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
@@ -380,7 +382,7 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Récupère tous les descendants d'un noeud donné
+	 * Rï¿½cupï¿½re tous les descendants d'un noeud donnï¿½
 	 * @param nodus Le noeud dont on veut les descendants
 	 */
 	public void getDescendants(String nodus) {
@@ -389,17 +391,17 @@ public class HandlingBinaryTrees {
 		node = StringToGraphNode(nodus);
 		if(node != null) {
 			resetColor();
-			colorSelect(node); // On met en rouge le noeud sélectionné
-			colorDescendants(node); // On met en vert les descendants du noeud sélectionné
+			colorSelect(node); // On met en rouge le noeud sï¿½lectionnï¿½
+			colorDescendants(node); // On met en vert les descendants du noeud sï¿½lectionnï¿½
 		} else {
-			System.out.println("Paramètre non valide.");
+			System.out.println("Paramï¿½tre non valide.");
 		}
 	}
 	
 	/**
-	 * Met en couleur tous les ascendants d'un noeud donné par récursivité
+	 * Met en couleur tous les ascendants d'un noeud donnï¿½ par rï¿½cursivitï¿½
 	 * @param node Le noeud dont on veut les ascendants
-	 * @return Le GraphNode node pour permettre la récursivité
+	 * @return Le GraphNode node pour permettre la rï¿½cursivitï¿½
 	 */
 	private GraphNode colorAscendants(GraphNode node) {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
@@ -415,7 +417,7 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Récupère tous les ascendants d'un noeud donné
+	 * Rï¿½cupï¿½re tous les ascendants d'un noeud donnï¿½
 	 * @param nodus Le noeud dont on veut les ascendants
 	 */
 	public void getAscendants(String nodus) {
@@ -427,14 +429,14 @@ public class HandlingBinaryTrees {
 			colorSelect(node);
 			colorAscendants(node);
 		} else {
-			System.out.println("Paramètre non valide.");
+			System.out.println("Paramï¿½tre non valide.");
 		}
 	}
 	
 	/**
-	 * Récupère les pères d'un noeud donné
-	 * @param node Le noeud (GraphNode) dont on veut les pères
-	 * @return La liste contenant les pères du noeud donné
+	 * Rï¿½cupï¿½re les pï¿½res d'un noeud donnï¿½
+	 * @param node Le noeud (GraphNode) dont on veut les pï¿½res
+	 * @return La liste contenant les pï¿½res du noeud donnï¿½
 	 */
 	private List<GraphNode> getFatherOf(GraphNode node)  {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
@@ -451,9 +453,9 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Récupère les oncles d'un noeud donné
+	 * Rï¿½cupï¿½re les oncles d'un noeud donnï¿½
 	 * @param node Le noeud (GraphNode) dont on veut les oncles
-	 * @return La liste contenant les oncles du noeud donné
+	 * @return La liste contenant les oncles du noeud donnï¿½
 	 */
 	private List<GraphNode> getUnclesOf(GraphNode node) {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
@@ -463,10 +465,10 @@ public class HandlingBinaryTrees {
 		List<GraphNode> grandFathers = new ArrayList<GraphNode>();
 		List<GraphNode> uncles = new ArrayList<GraphNode>();
 		
-		fathers = getFatherOf(node); // ON récupère les pères du noeud
+		fathers = getFatherOf(node); // ON rï¿½cupï¿½re les pï¿½res du noeud
 		
 		for(GraphNode father : fathers) {
-			grandFathers.addAll(getFatherOf(father)); // On récupère les grand père du noeud (pères des pères)
+			grandFathers.addAll(getFatherOf(father)); // On rï¿½cupï¿½re les grand pï¿½re du noeud (pï¿½res des pï¿½res)
 		}
 		
 		for(GraphConnection connection : listConnection) {
@@ -482,7 +484,7 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Récupère et met en couleurs les oncles d'un noeud donné
+	 * Rï¿½cupï¿½re et met en couleurs les oncles d'un noeud donnï¿½
 	 * @param nodus Le noeud (GraphNode) dont on veut les oncles
 	 */
 	public void getUncles(String nodus) {	
@@ -497,14 +499,14 @@ public class HandlingBinaryTrees {
 			uncles = getUnclesOf(node);
 			colorAll(uncles);
 		} else {
-			System.out.println("Paramètre non valide.");
+			System.out.println("Paramï¿½tre non valide.");
 		}
 	}
 	
 	/**
-	 * Récupère les cousins d'un noeud donné
+	 * Rï¿½cupï¿½re les cousins d'un noeud donnï¿½
 	 * @param node Le noeud (GraphNode) dont on veut les cousins
-	 * @return La liste contenant les cousins du noeud donné
+	 * @return La liste contenant les cousins du noeud donnï¿½
 	 */
 	private List<GraphNode> getCousinsOf(GraphNode node) {
 		List<GraphConnection> listConnection = new ArrayList<GraphConnection>();
@@ -526,7 +528,7 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Récupère et met en couleur les cousins d'un noeud donné
+	 * Rï¿½cupï¿½re et met en couleur les cousins d'un noeud donnï¿½
 	 * @param nodus Le noeud (GraphNode) dont on veut les cousins
 	 */
 	public void getCousins(String nodus) {		
@@ -541,15 +543,15 @@ public class HandlingBinaryTrees {
 			cousins = getCousinsOf(node);
 			colorAll(cousins);
 		} else {
-			System.out.println("Paramètre non valide.");
+			System.out.println("Paramï¿½tre non valide.");
 		}
 	}
 	
 	/**
-	 * Récupère les oncles en commun de deux noeuds donnés
+	 * Rï¿½cupï¿½re les oncles en commun de deux noeuds donnï¿½s
 	 * @param node1 Le noeud (GraphNode) dont on veut les oncles en commun
 	 * @param node2 Le noeud (GraphNode) dont on veut les oncles en commun
-	 * @return La liste contenant les oncles en commun de noeuds donnés
+	 * @return La liste contenant les oncles en commun de noeuds donnï¿½s
 	 */
 	private List<GraphNode> getCommonUnclesOf(GraphNode node1, GraphNode node2) {		
 		List<GraphNode> unclesNode1 = new ArrayList<GraphNode>();
@@ -571,7 +573,7 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Récupère et met en couleur les oncles en commun de deux noeuds donnés
+	 * Rï¿½cupï¿½re et met en couleur les oncles en commun de deux noeuds donnï¿½s
 	 * @param node1 Le noeud (GraphNode) dont on veut les oncles en commun
 	 * @param node2 Le noeud (GraphNode) dont on veut les oncles en commun
 	 */
@@ -590,15 +592,15 @@ public class HandlingBinaryTrees {
 			commonUncles = getCommonUnclesOf(nodus1, nodus2);
 			colorAll(commonUncles);
 		} else {
-			System.out.println("Paramètres non valides.");
+			System.out.println("Paramï¿½tres non valides.");
 		}
 	}
 	
 	/**
-	 * Récupère les cousins en commun de deux noeuds donnés
+	 * Rï¿½cupï¿½re les cousins en commun de deux noeuds donnï¿½s
 	 * @param node1 Le noeud (GraphNode) dont on veut les cousins en commun
 	 * @param node2 Le noeud (GraphNode) dont on veut les cousins en commun
-	 * @return La liste contenant les cousins en commun de noeuds donnés
+	 * @return La liste contenant les cousins en commun de noeuds donnï¿½s
 	 */
 	private List<GraphNode> getCommonCousinsOf(GraphNode node1, GraphNode node2) {
 		List<GraphNode> cousinsNode1 = new ArrayList<GraphNode>();
@@ -620,7 +622,7 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Récupère et met en couleur les cousins en commun de deux noeuds donnés
+	 * Rï¿½cupï¿½re et met en couleur les cousins en commun de deux noeuds donnï¿½s
 	 * @param node1 Le noeud (GraphNode) dont on veut les cousins en commun
 	 * @param node2 Le noeud (GraphNode) dont on veut les cousins en commun
 	 */
@@ -639,12 +641,12 @@ public class HandlingBinaryTrees {
 			commonCousins = getCommonCousinsOf(nodus1, nodus2);
 			colorAll(commonCousins);
 		} else {
-			System.out.println("Paramètres non valides.");
+			System.out.println("Paramï¿½tres non valides.");
 		}
 	}
 	
 	/**
-	 * Créé l'arbre généalogique à la fois de manière abstraite (Network) et graphique (Graph) de manière récursive
+	 * Crï¿½ï¿½ l'arbre gï¿½nï¿½alogique ï¿½ la fois de maniï¿½re abstraite (Network) et graphique (Graph) de maniï¿½re rï¿½cursive
 	 * @param source Le <GraphNode racine de lequel on part pour commencer l'arbre
 	 * @param current Le lien courant, celui que l'on traite actuellement
 	 * @param links La liste des liens contenus dans le Graph
@@ -664,37 +666,38 @@ public class HandlingBinaryTrees {
 	}
 	
 	/**
-	 * Charge le fichier XML reçue en paramètre
+	 * Charge le fichier XML reï¿½ue en paramï¿½tre
 	 * @param file Le fichier XML que l'on veut charger
 	 */
 	
 	public void loadData(String file) {
 		try{
-			// création d'une fabrique de parseurs SAX
+			// crï¿½ation d'une fabrique de parseurs SAX
 			SAXParserFactory fabrique = SAXParserFactory.newInstance();
 
-			// création d'un parseur SAX
+			// crï¿½ation d'un parseur SAX
 			SAXParser parseur = fabrique.newSAXParser();
 
 			// lecture d'un fichier XML avec un DefaultHandler
 			file = "./"+file;
 			File fichier = new File(file);
-			if(!fichier.exists()) { // Si le fichier n'exite pas on charge le fichier par défaut
-				System.out.println("Le fichier spécifié n'existe pas. Chargement du fichier par défaut !");
+			if(!fichier.exists()) { // Si le fichier n'exite pas on charge le fichier par dï¿½faut
+				System.out.println("Le fichier spï¿½cifiï¿½ n'existe pas. Chargement du fichier par dï¿½faut !");
 				fichier = new File("file.xml");
 			}
+			myNetwork.clear();
 			DefaultHandler gestionnaire = new MyHandler(myNetwork);
 			parseur.parse(fichier, gestionnaire);
 			
 		}catch(ParserConfigurationException pce){
 			System.out.println("Erreur de configuration du parseur");
-			System.out.println("Lors de l'appel à newSAXParser()");
+			System.out.println("Lors de l'appel ï¿½ newSAXParser()");
 		}catch(SAXException se){
 			System.out.println("Erreur de parsing");
-			System.out.println("Lors de l'appel à parse()");
+			System.out.println("Lors de l'appel ï¿½ parse()");
 		}catch(IOException ioe){
-			System.out.println("Erreur d'entrée/sortie");
-			System.out.println("Lors de l'appel à parse()");
+			System.out.println("Erreur d'entrï¿½e/sortie");
+			System.out.println("Lors de l'appel ï¿½ parse()");
 		}
 		
 		List<Link> links = new ArrayList<Link>();
